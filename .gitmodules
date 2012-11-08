@@ -1,0 +1,9 @@
+[submodule "submodules/add2home"]
+	path = submodules/add2home
+	url = https://github.com/cubiq/add-to-homescreen
+[submodule "submodules/webgl-filter"]
+	path = submodules/webgl-filter
+	url = https://github.com/evanw/webgl-filter/
+[submodule "submodules/fd-slider"]
+	path = submodules/fd-slider
+	url = https://github.com/freqdec/fd-slider

@@ -170,7 +170,7 @@ body {
 }
 
 #sidebar .item .wpt_contents .segment {
-    line-height: 20px;
+    line-height: 25px;
     display: inline-block;
     padding: 1px 1px;
     vertical-align: top;
@@ -555,6 +555,19 @@ and (max-device-width : 1024px) {
     #editorHTML textarea {
         height: 490px;
     }
+    
+    .fd-slider-handle, .fd-slider-handle:active, .fd-slider-handle:hover {
+        height: 23px;
+        top: -2px;
+        padding-left: 10px;
+        border-radius: 10px;
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+    }
+    
+    #sidebar .item .wpt_contents .segment {
+        line-height: 32px;
+    }
 }
 
 @media only screen 
@@ -575,4 +588,21 @@ and (max-device-width : 480px) {
         font-size: 21px;
         text-align: center;
     }
+}
+
+:-webkit-full-screen #box {
+    height: auto;
+    width: auto;
+    margin: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 0px;
+}
+
+:-webkit-full-screen #topbar, :-webkit-full-screen #topgrad {
+    display: none;
+    visibility: hidden;
 }

@@ -7,6 +7,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <link href="https://plus.google.com/112354811285966128277?rel=author" rel="author" type="text/plain"/>
+    <meta name="description" content="selfCSS is a WYSIWYG CSS3 Editor">
+    <meta name="author" content="Simon Waldherr">
+    <meta name="keywords" content="CSS, WYSIWYG, HTML, JS, Editor, Generator, Position, Style, Background, Border, Margin, Padding, Shadow, Filter">
     
     <script src="script.js" type="text/javascript"></script>
     <script src="add2home.js" type="text/javascript"></script>
@@ -34,6 +37,7 @@
     <div id="box">
       <div id="toolbar">
         <div class="button" id="about_btn" onclick="wpt_dialog('about');">About</div>
+        <div class="button" id="fullscreen_btn" onclick="wpt_fullscreen();">Fullscreen</div>
         <div class="button" id="foldin_btn" onclick="wpt_fold_all_in();">fold all in</div>
         <div class="button" id="foldout_btn" onclick="wpt_fold_all_out();">fold all out</div>
         <div class="button" id="examples_btn" onclick="wpt_dialog('examples');">Examples</div>
@@ -172,7 +176,8 @@
             <div id="displayt" class="segmented full"><div class="segment full selected">block</div><div class="segment full">inline</div><div class="segment full">inline-block</div><div class="segment full">inline-table</div><div class="segment full">none</div></div>
           </div>
         </div>
-        <div class="item"><div class="title" id="Main-Background">Background</div>
+        <div class="header">Background</div>
+        <div class="item"><div class="title" id="Background-Color">Color</div>
           <div class="wpt_contents">
             <div id="bgonoff" class="segmented segtwo"><div class="segment">off</div><div class="segment selected">on</div></div>
             <div id="bgd" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
@@ -200,6 +205,53 @@
                   <td>Opacity:</td>
                   <td>
                     <input name="bgalpha" id="bgalpha" class="fd_slider" type="range" max="1" min="0" step="0.1" title="bgalpha" value="1"  maxlength="6" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="item"><div class="title" id="Background-Image">Image</div>
+          <div class="wpt_contents">
+            <div id="backgroundimg" class="segmented full"><div class="segment full selected">none</div><div class="segment full">summer</div><div class="segment full">winter</div></div>
+          </div>
+        </div>
+        <div class="item"><div class="title" id="Background-Size">Size</div>
+          <div class="wpt_contents">
+            <div id="bgstype" class="segmented segtwo"><div class="segment selected">px</div><div class="segment">%</div></div>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Width:</td>
+                  <td>
+                    <input name="bgw" id="bgw" class="fd_slider" type="range" max="200" min="0" title="bgw" value="100"  maxlength="6" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Height:</td>
+                  <td>
+                    <input name="bgh" id="bgh" class="fd_slider" type="range" max="200" min="0" title="bgh" value="100"  maxlength="6" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="item"><div class="title" id="Background-Position">Position</div>
+          <div class="wpt_contents">
+            <div id="bgptype" class="segmented segtwo"><div class="segment selected">px</div><div class="segment">%</div></div>
+            <table>
+              <tbody>
+                <tr>
+                  <td>Top:</td>
+                  <td>
+                    <input name="bgtop" id="bgtop" class="fd_slider" type="range" max="200" min="0" title="bgtop" value="0"  maxlength="6" />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Left:</td>
+                  <td>
+                    <input name="bgleft" id="bgleft" class="fd_slider" type="range" max="200" min="0" title="bgleft" value="0"  maxlength="6" />
                   </td>
                 </tr>
               </tbody>

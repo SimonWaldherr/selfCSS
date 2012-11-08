@@ -29,6 +29,22 @@ function wpt_init()
     window.setTimeout(insert_sm, 225);
   }
 
+function wpt_fullscreen() {
+  var element = document.body;
+  if (element.requestFullScreen)
+    {
+      element.requestFullScreen();
+    }
+  else if (element.mozRequestFullScreen)
+    {
+      element.mozRequestFullScreen();
+    }
+  else if (element.webkitRequestFullScreen)
+    {
+      element.webkitRequestFullScreen();
+    }
+}
+
 function wpt_init_fd_slider()
   {
     var animation, maxvalue, minvalue, mstep;
@@ -339,6 +355,7 @@ function generate_css()
       }
     
     //background
+    //color
     if($id('wpt_sbgonoff').value == 'on')
       {
         if($id('bgalpha').value != '1')
@@ -358,6 +375,46 @@ function generate_css()
           }
       }
     
+    //image
+    if($id('wpt_sbackgroundimg').value != 'none')
+      {
+        if($id('wpt_sbackgroundimg').value == 'summer')
+          {
+            css += '  background-image: url(\'./summer.jpg\'); \n';
+          }
+        if($id('wpt_sbackgroundimg').value == 'winter')
+          {
+            css += '  background-image: url(\'./winter.jpg\'); \n';
+          }
+        
+        if(($id('bgtop').value != '0')||($id('bgleft').value != '0'))
+          {
+            css += '  background-position: '+$id('bgtop').value+$id('wpt_sbgptype').value+' '+$id('bgleft').value+$id('wpt_sbgptype').value+'; \n';
+          }
+        if(($id('bgw').value != '0')||($id('bgh').value != '0'))
+          {
+            if($id('bgw').value == '0')
+              {
+                value1 = 'auto';
+              }
+            else
+              {
+                value1 = $id('bgw').value+$id('wpt_sbgstype').value;
+              }
+            if($id('bgh').value == '0')
+              {
+                value2 = 'auto';
+              }
+            else
+              {
+                value2 = $id('bgh').value+$id('wpt_sbgstype').value;
+              }
+            
+            css += '  background-size: '+value1+' '+value2+'; \n';
+          }
+      }
+    
+    //text
     //size
     if($id('wpt_sfsizeonoff').value == 'on')
       {
@@ -570,7 +627,7 @@ function loadCSSexample(demo)
         wpt_fold_all_out();
         loadCSSexample('clear');
         
-        loadExample('imgs');
+        wpt_setButton('backgroundimg', 'summer');
         wpt_setButton('sizeonoff', 'on');
         $id('width').value = 440;
         fdSlider.updateSlider('width');
@@ -607,7 +664,7 @@ function loadCSSexample(demo)
     else if(demo == 'imgw')
       {
         loadCSSexample('imgs');
-        loadExample('imgw');
+        wpt_setButton('backgroundimg', 'winter');
       }
     else if(demo == 'text')
       {
@@ -658,6 +715,7 @@ function loadCSSexample(demo)
       {
         loadExample('div');
         
+        //Main
         //Position
         wpt_setButton('posonoff', 'off');
         wpt_setButton('postype1', 'relative');
@@ -716,6 +774,7 @@ function loadCSSexample(demo)
         wpt_setButton('displayt', 'block');
         
         //Background
+        //Color
         wpt_setButton('bgonoff', 'off');
         if(wpt_setButton('bgd', 'different') === 1)
           {
@@ -731,6 +790,22 @@ function loadCSSexample(demo)
         $id('bgalpha').value = 1;
         fdSlider.updateSlider($id('bgalpha').id);
         
+        //Image
+        wpt_setButton('backgroundimg', 'none');
+        wpt_setButton('bgstype', 'px');
+        $id('bgw').value = 0;
+        fdSlider.updateSlider($id('bgw').id);
+        $id('bgh').value = 0;
+        fdSlider.updateSlider($id('bgh').id);
+        
+        //Position
+        wpt_setButton('bgptype', 'px');
+        $id('bgtop').value = 0;
+        fdSlider.updateSlider($id('bgtop').id);
+        $id('bgleft').value = 0;
+        fdSlider.updateSlider($id('bgleft').id);
+        
+        //Text
         //Size
         wpt_setButton('fsizeonoff', 'off');
         wpt_setButton('fontsizetype', 'px');
