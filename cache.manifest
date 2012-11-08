@@ -1,0 +1,19 @@
+CACHE MANIFEST
+#v.:07.11.2012
+#time:23:22:00
+
+CACHE:
+http://selfcss.org/
+http://selfcss.org/script.js
+http://selfcss.org/style.css
+http://selfcss.org/favicon.ico
+http://selfcss.org/logo.png
+http://selfcss.org/apple-touch-icon-precomposed.png
+http://selfcss.org/summer.jpg
+http://selfcss.org/winter.jpg
+
+NETWORK:
+*
+
+FALLBACK:
+http://selfcss.org/online.js http://selfcss.org/offline.js

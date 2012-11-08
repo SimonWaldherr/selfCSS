@@ -1,0 +1,578 @@
+* {
+    cursor: default;
+}
+
+a { cursor: pointer; }
+table { border-collapse: collapse; }
+td { padding: 0; vertical-align: top; }
+body {
+    font: 12px Tahoma, sans-serif;
+}
+
+#toolbar, #sidebar, #fade, #dialog, #dimmer, #topgrad {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+.ui-slider-handle {
+    cursor: default;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    margin: -6px;
+    border-radius: 6px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.ui-state-focus {
+    outline: none;
+}
+
+.button, .segment {
+    cursor: pointer !important;
+    display: inline-block;
+    padding: 1px 15px;
+    border-radius: 4px;
+    vertical-align: top;
+}
+
+.button:active {
+    padding: 2px 15px 0 15px;
+}
+
+.button.disabled {
+    padding: 1px 15px;
+}
+
+.select_textfield {
+    display: none;
+    visibility: hidden;
+}
+
+#topbar {
+    position: relative;
+    top: 20px;
+    width: 100%;
+    height: 44px;
+    margin: 20px auto 5px auto;
+    border-radius: 6px;
+}
+
+#topbar img {
+    position: relative;
+    z-index: 1;
+    height: 75px;
+    display: block;
+    float: left;
+    margin: 5px;
+}
+
+#topbar .item {
+
+}
+
+#toolbar {
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    height: 44px;
+    border-radius: 6px 6px 0px 0px;
+}
+
+#toolbar .button {
+    float: left;
+    line-height: 27px;
+    margin: 7px 0 0 7px;
+}
+
+#sidebar {
+    z-index: 1;
+    position: absolute;
+    text-align: left;
+    left: 0;
+    top: 45px;
+    bottom: 0;
+    width: 300px;
+    padding: 0 0 20px 0;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-radius: 0px 0px 0px 8px;
+}
+
+#sidebar .header {
+    padding: 15px 0 5px 15px;
+}
+
+#sidebar .item {
+    position: relative;
+    margin: 0 0px;
+    padding: 0 40px;
+    height: auto;
+    overflow-y: hidden;
+
+    transition: height 0.4s;
+    -moz-transition: height 0.4s;
+    -webkit-transition: height 0.4s;
+    -o-transition: height 0.4s;
+}
+
+#sidebar .item .title {
+    height: 25px;
+    font-weight: bold;
+    line-height: 25px;
+}
+
+#sidebar .item .wpt_contents {
+    padding: 0 0 20px 0;
+}
+
+#sidebar .item .wpt_contents table {
+    padding: 0 0 5px 0;
+    width: 100%;
+}
+
+#sidebar .item .wpt_contents td {
+    width: 0;
+    white-space: nowrap;
+    padding-top: 5px;
+}
+
+#sidebar .item .wpt_contents td + td {
+    width: 100%;
+    padding-left: 15px;
+}
+
+#sidebar .item .wpt_contents .button {
+    line-height: 24px;
+    margin: 15px 0 0 0;
+}
+
+#sidebar .item .wpt_contents .reset {
+    text-decoration: underline;
+    display: inline-block;
+    line-height: 24px;
+    margin: 15px 0 0 15px;
+    cursor: pointer;
+}
+
+#sidebar .item .wpt_contents .slider {
+    position: relative;
+    margin: 8px 0 0 0;
+}
+
+#sidebar .item .wpt_contents .segmented {
+    margin: 6px;
+    text-align: center;
+}
+
+#sidebar .item .wpt_contents .segment {
+    line-height: 20px;
+    display: inline-block;
+    padding: 1px 1px;
+    vertical-align: top;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
+}
+
+#sidebar .item .wpt_contents .segment.full {
+    min-width: 166px;
+    text-align: center;
+}
+
+#sidebar .item .wpt_contents .segment.selected {
+    padding: 1px 1px;
+}
+
+#sidebar .item .wpt_contents .segment:first-child {
+    -webkit-border-radius: 5px 0px 0px 5px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+#sidebar .item .wpt_contents .segment:last-child {
+    -webkit-border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+#sidebar .item .wpt_contents .full .segment:first-child {
+    -webkit-border-radius: 5px 5px 0px 0px;
+    border-radius: 5px 5px 0px 0px;
+}
+
+#sidebar .item .wpt_contents .full .segment:last-child {
+    -webkit-border-radius: 0px 0px 5px 5px;
+    border-radius: 0px 0px 5px 5px;
+}
+
+#sidebar .item .wpt_contents .curves {
+    width: 200px;
+    height: 200px;
+    margin: 10px 0;
+}
+
+#sidebar .item.active {
+    margin-bottom: 5px;
+}
+
+#sidebar .item.active .title {
+    line-height: 27px;
+    margin-bottom: 15px;
+}
+
+#sidebar .item.active .wpt_contents .slider {
+    margin: 8px 0 0 0;
+}
+
+#sidebar input {
+    display: none;
+}
+
+#sidebar table {
+    position: relative;
+    top: 10px;
+}
+
+#sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+    border-radius: 0px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    padding: 5px;
+}
+
+#dialogs {
+    display: none;
+}
+
+#dialog {
+    z-index: 4;
+    position: absolute;
+    left: 50%;
+    top: -600px;
+    width: 650px;
+    margin-left: -325px;
+    padding: 20px;
+    border-radius: 3px;
+
+    transition: all 0.4s;
+    -moz-transition: all 0.4s;
+    -webkit-transition: all 0.4s;
+    -o-transition: all 0.4s;
+}
+
+#dialog .contents {
+    padding-bottom: 20px;
+    line-height: 16px;
+}
+
+#dialog .contents .images {
+    padding: 15px 0 8px 0;
+}
+
+#dialog .contents .credits, #dialog .contents .credits a {
+    font-style: italic;
+    font-size: 10px;
+}
+
+#dialog .contents img {
+    margin: 0 7px 7px 0;
+}
+
+#dialog .button {
+    position: relative;
+    line-height: 24px;
+    margin-right: 7px;
+    float: right;
+}
+
+#dialog .contents .button {
+    padding: 20px;
+    float: left;
+}
+
+#dialog input.upload {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+#dimmer {
+    position: fixed;
+    z-index: -1;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+
+    transition: opacity 0.8s;
+    -moz-transition: opacity 0.8s;
+    -webkit-transition: opacity 0.8s;
+    -o-transition: opacity 0.8s;
+}
+
+#loading {
+    text-align: center;
+    padding-top: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    line-height: 16px;
+}
+
+#loading .sadface {
+    font-size: 100px;
+    line-height: 100px;
+    padding-bottom: 40px;
+}
+
+#box{
+    height: 740px;
+    width: 90%;
+    margin: 0 auto 100px auto;
+    position: relative;
+    top: 4em;
+    border-radius: 6px;
+}
+
+#topgrad{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    width: 100%;
+    height: 180px;
+    z-index: -1;
+}
+
+#toolbar .segmented {
+    position: absolute;
+    right: 6px;
+    margin: 7px 0 0 0;
+}
+
+#toolbar .segment {
+    line-height: 27px;
+    display: inline-block;
+    padding: 1px 15px;
+    vertical-align: top;
+    -webkit-border-radius: 0px 0px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
+}
+
+#toolbar .segment:active {
+    padding: 2px 15px 0 15px;
+}
+
+#toolbar .segment.selected {
+    padding: 2px 15px 0 15px;
+}
+
+#toolbar .segment:first-child {
+    -webkit-border-radius: 5px 0px 0px 5px;
+    border-radius: 5px 0px 0px 5px;
+}
+
+#toolbar .segment:last-child {
+    -webkit-border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px;
+}
+
+.segtwo > .segment {
+    width: 82px;
+    text-align: center;
+    padding: 0px;
+}
+
+.segthree > .segment {
+    width: 54px;
+    text-align: center;
+    padding: 1px;
+}
+
+.segfour > .segment {
+    width: 40px;
+    text-align: center;
+    padding: 0px;
+}
+
+#editorHTML, #editorHTML textarea, #editorCSS, #editorCSS textarea {
+    height: 500px;
+    width: 100%;
+}
+
+#editorCSS .button, #editorHTML .button {
+    padding: 15px;
+    text-align: center;
+    margin: auto;
+    display: inline-block;
+}
+
+#editorCSS .button a, #editorHTML .button a {
+    padding: 20px;
+    color: white;
+    text-decoration: none;
+}
+
+#editor {
+    position: absolute;
+    top: 45px;
+    left: 300px;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px;
+    padding: 25px;
+    overflow: auto;
+    display: inline-block;
+    -moz-user-select: auto;
+    -webkit-user-select: auto;
+}
+
+#editorCSS, #editorHTML {
+    display: none;
+}
+
+#CSSbox {
+    background: #ccc;
+    overflow: auto;
+    height: auto;
+    text-shadow: none;
+    margin: 0px;
+    -moz-user-select: auto;
+    -webkit-user-select: auto;
+}
+
+#toolbar #foldin_btn {
+    margin-left: 50px;
+}
+
+#examples_btn {
+    position: absolute;
+    right: 195px;
+}
+
+#dialog {
+    top: 200px;
+    display: block;
+}
+
+#dialog iframe {
+    border: 0px;
+}
+#dimmer {
+    z-index: 3;
+    opacity: 1;
+}
+
+#onSmartphones {
+    display: none;
+}
+
+.fd-slider-bar {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 0px;
+    left: 10px;
+    z-index: 2;
+    height: 0px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 0px;
+    background-clip: padding-box;
+}
+
+.fd-slider-bar, .fd-slider-range {
+    margin-left: -10px;
+}
+
+.fd-slider-range {
+    opacity: 0.2;
+}
+
+.fd-slider-handle, .fd-slider-handle:active, .fd-slider-handle:hover {
+    cursor: pointer;
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    top: 4px;
+    padding-left: 10px;
+    border-radius: 6px;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+}
+
+.fd-slider-drag-horizontal,
+.fd-slider-vertical .fd-slider-handle,
+body.fd-slider-drag-horizontal,
+body.fd-slider-drag-horizontal *,
+body.fd-slider-drag-vertical,
+body.fd-slider-drag-vertical * {
+    cursor:pointer !important;
+}
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+    
+    #box {
+        height: auto;
+        width: auto;
+        margin: 0px;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        border-radius: 0px;
+    }
+    #topbar, #topgrad {
+        display: none;
+        visibility: hidden;
+    }
+    #editorHTML .button {
+        padding: 10px;
+        text-align: center;
+        margin: 5px;
+        display: block;
+    }
+    #editorHTML textarea {
+        height: 490px;
+    }
+}
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 480px) {
+    
+    #box {
+        display: none;
+    }
+    #onSmartphones {
+        display: block;
+        position: absolute;
+        top: 200px;
+        bottom: 10px;
+        left: 30px;
+        right: 30px;
+        color: black;
+        font-size: 21px;
+        text-align: center;
+    }
+}
