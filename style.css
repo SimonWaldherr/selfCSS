@@ -602,7 +602,24 @@ and (max-device-width : 480px) {
     border-radius: 0px;
 }
 
-:-webkit-full-screen #topbar, :-webkit-full-screen #topgrad {
+:-webkit-full-screen #topbar, :-webkit-full-screen #topgrad, :-webkit-full-screen #fullscreen_btn {
+    display: none;
+    visibility: hidden;
+}
+
+:-moz-full-screen #box {
+    height: auto;
+    width: auto;
+    margin: 0px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    border-radius: 0px;
+}
+
+:-moz-full-screen #topbar, :-moz-full-screen #topgrad, :-moz-full-screen #fullscreen_btn {
     display: none;
     visibility: hidden;
 }
