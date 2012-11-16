@@ -556,6 +556,42 @@ and (max-device-width : 1024px) {
         height: 490px;
     }
     
+    #fullscreen_btn {
+        display: none;
+    }
+    
+    #examples_btn {
+        right: 205px;
+    }
+    
+    #toolbar .button, #toolbar .segment {
+        line-height: 35px;
+    }
+    
+    #toolbar {
+        height: 53px;
+    }
+    
+    #sidebar, #editor {
+        top: 53px;
+    }
+    
+    #sidebar .item .title {
+        height: 35px;
+        font-weight: bold;
+        line-height: 35px;
+        font-size: 16px;
+    }
+    
+    #sidebar .item.active .title {
+        line-height: 35px;
+        margin-bottom: 15px;
+    }
+    
+    #sidebar tr {
+        height: 50px;
+    }
+    
     .fd-slider-handle, .fd-slider-handle:active, .fd-slider-handle:hover {
         height: 23px;
         top: -2px;

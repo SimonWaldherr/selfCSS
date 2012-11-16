@@ -3,7 +3,9 @@ function $id(id)
     return document.getElementById(id);
   }
 
+var wpt_device_type = false;
 var wpt_shift_key_status = false;
+
 function wpt_init()
   {
     wpt_init_fd_slider();
@@ -12,6 +14,7 @@ function wpt_init()
     $id('loadingstat').innerHTML += '.';
     wpt_save_items_height();
     $id('loadingstat').innerHTML += '.';
+    wpt_set_device_type();
     window.setTimeout(wpt_fold_all_in,150);
     var menu_title, count = 0;
     var menu_titles = document.getElementsByClassName('wpt_contents');
@@ -24,26 +27,49 @@ function wpt_init()
             menu_title.previousSibling.addEventListener("click", wpt_fold_toggle, false);
           }
       }
+    
     document.body.addEventListener("keydown", wpt_keyset, false);
     document.body.addEventListener("keyup", wpt_keyrelease, false);
     window.setTimeout(insert_sm, 225);
+    
+    wpt_device_specific();
+    loadCSSexample('text');
   }
 
-function wpt_fullscreen() {
-  var element = document.body;
-  if (element.requestFullScreen)
-    {
-      element.requestFullScreen();
-    }
-  else if (element.mozRequestFullScreen)
-    {
-      element.mozRequestFullScreen();
-    }
-  else if (element.webkitRequestFullScreen)
-    {
-      element.webkitRequestFullScreen();
-    }
-}
+function wpt_set_device_type()
+  {
+    if($id('toolbar').offsetHeight == 44)
+      {
+        wpt_device_type = 'desktop';
+        $id('devicetype').innerHTML = 'desktop version';
+      }
+    else if($id('toolbar').offsetHeight == 53)
+      {
+        wpt_device_type = 'ipad';
+        $id('devicetype').innerHTML = 'iPad version';
+      }
+    else
+      {
+        wpt_device_type = false;
+      }
+  }
+
+function wpt_fullscreen() 
+  {
+    var element = document.body;
+    if (element.requestFullScreen)
+      {
+        element.requestFullScreen();
+      }
+    else if (element.mozRequestFullScreen)
+      {
+        element.mozRequestFullScreen();
+      }
+    else if (element.webkitRequestFullScreen)
+      {
+        element.webkitRequestFullScreen();
+      }
+  }
 
 function wpt_init_fd_slider()
   {
@@ -124,6 +150,14 @@ function wpt_init_select()
       }
   }
 
+function wpt_device_specific()
+  {
+    if(wpt_device_type == 'desktop')
+      {
+        $id('special_style').innerHTML = '.fd-slider-handle:before,.fd-slider-handle:after{content:"";opacity:0;-webkit-transition-property:all;-moz-transition-property:all;-ms-transition-property:all;-o-transition-property:all;transition-property:all;-webkit-transition-duration:0.3s;-moz-transition-duration:0.3s;-ms-transition-duration:0.3s;-o-transition-duration:0.3s;transition-duration:0.3s;-webkit-transition-delay:0.2s;-moz-transition-delay:0.2s;-ms-transition-delay:0.2s;-o-transition-delay:0.2s;transition-delay:0.2s;}.fd-slider-handle::before{display:block;position:absolute;top:-30px;left:-15px;margin:0px;margin-top:8px;width:50px;padding:1px;height:14px;line-height:12px;font-size:10px;text-shadow:0 1px 0 black;color:white;background:#222;z-index:1;content:attr(aria-valuetext);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 0 4px #AAA;-moz-box-shadow:0 0 4px #aaa;box-shadow:0 0 4px #AAA;}.fd-slider-handle:after{outline:none;content:"";display:block;position:absolute;top:-14px;left:50%;margin:0 0 0 -5px;background:#222;z-index:2;width:10px;height:10px;overflow:hidden;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);-webkit-box-shadow:0 0 4px #aaa;-moz-box-shadow:0 0 4px #aaa;box-shadow:0 0 4px #aaa;clip:rect(4px,14px,14px,4px);}.fd-slider-focused .fd-slider-handle:before,.fd-slider-hover .fd-slider-handle:before,.fd-slider-active .fd-slider-handle:before{top:-25px;opacity:1;}.fd-slider-focused .fd-slider-handle:after,.fd-slider-hover .fd-slider-handle:after,.fd-slider-active .fd-slider-handle:after{top:-9px;opacity:1;}.oldie .fd-slider-handle:before,.oldie .fd-slider-handle:after{display:none;}';
+      }
+  }
+
 function wpt_change_selected()
   {
     if(this.className.indexOf(' selected') != -1)
@@ -132,6 +166,17 @@ function wpt_change_selected()
       }
     var container = this.parentNode;
     var selectables = container.childNodes;
+    var same_diff_height;
+    
+    if(wpt_device_type == 'ipad')
+      {
+        same_diff_height = 170;
+      }
+    else
+      {
+        same_diff_height = 130;
+      }
+    
     for(x in selectables)
       {
         if(typeof selectables[x].className == 'string')
@@ -146,13 +191,13 @@ function wpt_change_selected()
       }
     if(this.innerHTML == 'same')
       {
-        this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)-110)+'px';
-        wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]-110);
+        this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)-same_diff_height)+'px';
+        wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]-same_diff_height);
       }
     else if(this.innerHTML == 'different')
       {
-        this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)+110)+'px';
-        wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]+110);
+        this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)+same_diff_height)+'px';
+        wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]+same_diff_height);
       }
     if(this.onclick == null)
       {
@@ -663,8 +708,46 @@ function loadCSSexample(demo)
       }
     else if(demo == 'imgw')
       {
-        loadCSSexample('imgs');
+        wpt_fold_all_out();
+        loadCSSexample('clear');
+        
         wpt_setButton('backgroundimg', 'winter');
+        wpt_setButton('sizeonoff', 'on');
+        $id('width').value = 440;
+        fdSlider.updateSlider('width');
+        $id('height').value = 535;
+        fdSlider.updateSlider('height');
+        wpt_setButton('margonoff', 'on');
+        $id('martop').value = 50;
+        fdSlider.updateSlider($id('martop').id);
+        $id('marleft').value = -101;
+        fdSlider.updateSlider($id('marleft').id);
+        $id('marright').value = -101;
+        fdSlider.updateSlider($id('marright').id);
+        wpt_setButton('bsonoff', 'on');
+        wpt_setButton('bstype', 'outside');
+        $id('bsred').value = 255;
+        fdSlider.updateSlider($id('bsred').id);
+        $id('bsgreen').value = 255;
+        fdSlider.updateSlider($id('bsgreen').id);
+        $id('bsblue').value = 255;
+        fdSlider.updateSlider($id('bsblue').id);
+        $id('bsalpha').value = 1;
+        fdSlider.updateSlider($id('bsalpha').id);
+        $id('bsrad').value = 25;
+        fdSlider.updateSlider($id('bsrad').id);
+        $id('bssp').value = -6;
+        fdSlider.updateSlider($id('bssp').id);
+        $id('degrot').value = -8;
+        fdSlider.updateSlider($id('degrot').id);
+        wpt_setButton('filteronoff', 'on');
+        $id('fsepia').value = 30;
+        fdSlider.updateSlider($id('fsepia').id);
+        $id('fbright').value = 5;
+        fdSlider.updateSlider($id('fbright').id);
+        $id('fsat').value = 60;
+        fdSlider.updateSlider($id('fsat').id);
+        wpt_fold_all_in();
       }
     else if(demo == 'text')
       {
@@ -686,7 +769,14 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('padright').id);
         $id('padbottom').value = 15;
         fdSlider.updateSlider($id('padbottom').id);
+        wpt_setButton('margonoff', 'on');
+        $id('marleft').value = -101;
+        fdSlider.updateSlider($id('marleft').id);
+        $id('marright').value = -101;
+        fdSlider.updateSlider($id('marright').id);
         wpt_setButton('disponoff', 'on');
+        wpt_setButton('bgonoff', 'on');
+        wpt_setButton('tconoff', 'on');
         wpt_fold_all_in();
       }
     else if(demo == 'list')
@@ -1007,7 +1097,15 @@ function wpt_dialog(id)
 function wpt_fold_in(e)
   {
     e.className = 'item';
-    e.style.height = '25px';
+    if(wpt_device_type == 'ipad')
+      {
+        e.style.height = '35px';
+      }
+    else
+      {
+        e.style.height = '25px';
+      }
+    
     if(e.firstChild.nextSibling.nextSibling.className == 'wpt_contents')
       {
         e.firstChild.nextSibling.nextSibling.style.display = 'none';
@@ -1095,7 +1193,14 @@ function wpt_save_items_height()
             if(typeof menu_item.previousSibling.previousSibling != 'undefined')
               {
                 prev_item = menu_item.previousSibling.previousSibling;
-                wpt_menu_items_height[prev_item.id] = menu_item.offsetHeight+35;
+                if(wpt_device_type == 'desktop')
+                  {
+                    wpt_menu_items_height[prev_item.id] = menu_item.offsetHeight+45;
+                  }
+                else
+                  {
+                    wpt_menu_items_height[prev_item.id] = menu_item.offsetHeight+55;
+                  }
               }
           }
       }
