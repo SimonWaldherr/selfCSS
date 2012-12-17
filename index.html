@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html manifest="cache.manifest">
   <head>
     <title>selfCSS - WYSIWYG CSS Editor</title>
@@ -40,8 +40,9 @@
       <div id="toolbar">
         <div class="button" id="about_btn" onclick="wpt_dialog('about');">About</div>
         <div class="button" id="fullscreen_btn" onclick="wpt_fullscreen();">Fullscreen</div>
-        <div class="button" id="foldin_btn" onclick="wpt_fold_all_in();">fold all in</div>
-        <div class="button" id="foldout_btn" onclick="wpt_fold_all_out();">fold all out</div>
+        <div class="button" id="foldin_btn" onclick="wpt_collapse_all();">collapse all</div>
+        <div class="button" id="foldout_btn" onclick="wpt_expand_all();">expand all</div>
+        <div class="button" id="foldout_btn" onclick="wpt_expand_enabled();">expand enabled</div>
         <div class="button" id="examples_btn" onclick="wpt_dialog('examples');">Examples</div>
         <div id="viewmode" class="segmented"><div class="segment" onclick="editor_show('CSS');">CSS</div><div class="segment" onclick="editor_show('HTML');">HTML</div><div class="segment selected" onclick="editor_show('View');">Preview</div></div>
       </div>
@@ -107,7 +108,7 @@
         <div class="item"><div class="title" id="Main-Padding">Padding</div>
           <div class="wpt_contents">
             <div id="padonoff" class="segmented segtwo"><div class="segment">off</div><div class="segment selected">on</div></div>
-            <div id="paddd" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="paddd" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>
@@ -141,7 +142,7 @@
         <div class="item"><div class="title" id="Main-Margin">Margin</div>
           <div class="wpt_contents">
             <div id="margonoff" class="segmented segtwo"><div class="segment">off</div><div class="segment selected">on</div></div>
-            <div id="margd" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="margd" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>
@@ -182,7 +183,7 @@
         <div class="item"><div class="title" id="Background-Color">Color</div>
           <div class="wpt_contents">
             <div id="bgonoff" class="segmented segtwo"><div class="segment">off</div><div class="segment selected">on</div></div>
-            <div id="bgd" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="bgd" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>
@@ -260,7 +261,7 @@
             </table>
           </div>
         </div>
-        <div class="header">Text</div>
+        <div class="header">Font</div>
         <div class="item"><div class="title" id="Text-Size">Size</div>
           <div class="wpt_contents">
             <div id="fsizeonoff" class="segmented segtwo"><div class="segment selected">off</div><div class="segment">on</div></div>
@@ -304,17 +305,17 @@
             </table>
           </div>
         </div>
-        <div class="item"><div class="title" id="Main-Font">Font</div>
+        <div class="item"><div class="title" id="Main-Font">Family</div>
           <div class="wpt_contents">
             <div id="fontonoff" class="segmented segtwo"><div class="segment selected">off</div><div class="segment">on</div></div>
             <div id="font" class="segmented full"><div class="segment full selected">Helvetica</div><div class="segment full">Lucida</div><div class="segment full">Georgia</div><div class="segment full">Menlo</div><div class="segment full">Hoefler</div></div>
           </div>
         </div>
         <div class="header">Border</div>
-        <div class="item"><div class="title" id="Border-Thickness">Thickness</div>
+        <div class="item"><div class="title" id="Border-Thickness">Width</div>
           <div class="wpt_contents">
             <div id="btonoff" class="segmented segtwo"><div class="segment">off</div><div class="segment selected">on</div></div>
-            <div id="bordert" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="bordert" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>
@@ -379,7 +380,7 @@
         <div class="item"><div class="title" id="Border-Radius">Radius</div>
           <div class="wpt_contents">
             <div id="bradonoff" class="segmented segtwo"><div class="segment">off</div><div class="segment selected">on</div></div>
-            <div id="borderd" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="borderd" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>
@@ -435,7 +436,7 @@
         </div>
         <div class="item"><div class="title" id="BS-Color">Color</div>
           <div class="wpt_contents">
-            <div id="bscold" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="bscold" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>
@@ -510,7 +511,7 @@
         </div>
         <div class="item"><div class="title" id="TS-Color">Color</div>
           <div class="wpt_contents">
-            <div id="tscold" class="segmented segtwo"><div class="segment selected">different</div><div class="segment">same</div></div>
+            <div id="tscold" class="segmented segtwo"><div class="segment selected">separate</div><div class="segment">common</div></div>
             <table>
               <tbody>
                 <tr>

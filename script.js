@@ -15,7 +15,7 @@ function wpt_init()
     wpt_save_items_height();
     $id('loadingstat').innerHTML += '.';
     wpt_set_device_type();
-    window.setTimeout(wpt_fold_all_in,150);
+    window.setTimeout(wpt_collapse_all,150);
     var menu_title, count = 0;
     var menu_titles = document.getElementsByClassName('wpt_contents');
     
@@ -189,12 +189,12 @@ function wpt_change_selected()
       {
         $id('wpt_s'+container.id).value = this.innerHTML;
       }
-    if(this.innerHTML == 'same')
+    if(this.innerHTML == 'common')
       {
         this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)-same_diff_height)+'px';
         wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]-same_diff_height);
       }
-    else if(this.innerHTML == 'different')
+    else if(this.innerHTML == 'separate')
       {
         this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)+same_diff_height)+'px';
         wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]+same_diff_height);
@@ -332,7 +332,7 @@ function generate_css()
     //padding
     if($id('wpt_spadonoff').value == 'on')
       {
-        if($id('wpt_spaddd').value == 'same')
+        if($id('wpt_spaddd').value == 'common')
           {
             css += '  padding: '+$id('padtop').value+'px; \n';
           }
@@ -382,7 +382,7 @@ function generate_css()
             value4 = 'auto';
           }
         
-        if($id('wpt_smargd').value == 'same')
+        if($id('wpt_smargd').value == 'common')
           {
             css += '  margin: '+value1+'; \n';
           }
@@ -409,7 +409,7 @@ function generate_css()
           }
         else
           {
-            if($id('wpt_sbgd').value == 'same')
+            if($id('wpt_sbgd').value == 'common')
               {
                 css += '  background: '+getColor('bgred', 'bgred', 'bgred')+'; \n';
               }
@@ -469,7 +469,7 @@ function generate_css()
     //color
     if($id('wpt_stconoff').value == 'on')
       {
-        if($id('wpt_smargd').value == 'same')
+        if($id('wpt_smargd').value == 'common')
           {
             css += '  color: '+getColor('tcred', 'tcred', 'tcred')+'; \n';
           }
@@ -507,7 +507,7 @@ function generate_css()
     //border
     if($id('wpt_sbtonoff').value == 'on')
       {
-        if($id('wpt_sbordert').value == 'same')
+        if($id('wpt_sbordert').value == 'common')
           {
             css += '  border: '+$id('bttop').value+'px '+getColor('bcred', 'bcgreen', 'bcblue')+' '+$id('wpt_sbtype').value+'; \n';
           }
@@ -523,7 +523,7 @@ function generate_css()
       }
     if($id('wpt_sbradonoff').value == 'on')
       {
-        if($id('wpt_sborderd').value == 'same')
+        if($id('wpt_sborderd').value == 'common')
           {
             css += '  border-radius: '+$id('brtl').value+'px; \n';
           }
@@ -536,7 +536,7 @@ function generate_css()
     //box-shadow
     if($id('wpt_sbsonoff').value == 'on')
       {
-        if($id('wpt_sbscold').value == 'same')
+        if($id('wpt_sbscold').value == 'common')
           {
             color = getColor('bsred', 'bsred', 'bsred');
           }
@@ -565,7 +565,7 @@ function generate_css()
     //text-shadow
     if($id('wpt_stsonoff').value == 'on')
       {
-        if($id('wpt_stscold').value == 'same')
+        if($id('wpt_stscold').value == 'common')
           {
             color = getColor('tsred', 'tsred', 'tsred');
           }
@@ -669,7 +669,7 @@ function loadCSSexample(demo)
   {
     if(demo == 'imgs')
       {
-        wpt_fold_all_out();
+        wpt_expand_all();
         loadCSSexample('clear');
         
         wpt_setButton('backgroundimg', 'summer');
@@ -704,11 +704,11 @@ function loadCSSexample(demo)
         wpt_setButton('filteronoff', 'on');
         $id('fsepia').value = 100;
         fdSlider.updateSlider($id('fsepia').id);
-        wpt_fold_all_in();
+        wpt_collapse_all();
       }
     else if(demo == 'imgw')
       {
-        wpt_fold_all_out();
+        wpt_expand_all();
         loadCSSexample('clear');
         
         wpt_setButton('backgroundimg', 'winter');
@@ -747,11 +747,11 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('fbright').id);
         $id('fsat').value = 60;
         fdSlider.updateSlider($id('fsat').id);
-        wpt_fold_all_in();
+        wpt_collapse_all();
       }
     else if(demo == 'text')
       {
-        wpt_fold_all_out();
+        wpt_expand_all();
         loadCSSexample('clear');
         
         loadExample('lorem');
@@ -777,11 +777,11 @@ function loadCSSexample(demo)
         wpt_setButton('disponoff', 'on');
         wpt_setButton('bgonoff', 'on');
         wpt_setButton('tconoff', 'on');
-        wpt_fold_all_in();
+        wpt_collapse_all();
       }
     else if(demo == 'list')
       {
-        wpt_fold_all_out();
+        wpt_expand_all();
         loadCSSexample('clear');
         loadExample('list');
         
@@ -799,7 +799,7 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('padright').id);
         $id('padbottom').value = 15;
         fdSlider.updateSlider($id('padbottom').id);
-        wpt_fold_all_in();
+        wpt_collapse_all();
       }
     else if(demo == 'clear')
       {
@@ -829,7 +829,7 @@ function loadCSSexample(demo)
         
         //Padding
         wpt_setButton('padonoff', 'off');
-        if(wpt_setButton('paddd', 'different') === 1)
+        if(wpt_setButton('paddd', 'separate') === 1)
           {
             $id('paddd').parentNode.parentNode.style.height = (parseInt($id('paddd').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('paddd').parentNode.parentNode.firstChild.id] = parseInt($id('paddd').parentNode.parentNode.style.height);
@@ -845,7 +845,7 @@ function loadCSSexample(demo)
         
         //Margin
         wpt_setButton('margonoff', 'off');
-        if(wpt_setButton('margd', 'different') === 1)
+        if(wpt_setButton('margd', 'separate') === 1)
           {
             $id('margd').parentNode.parentNode.style.height = (parseInt($id('margd').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('margd').parentNode.parentNode.firstChild.id] = parseInt($id('margd').parentNode.parentNode.style.height);
@@ -866,7 +866,7 @@ function loadCSSexample(demo)
         //Background
         //Color
         wpt_setButton('bgonoff', 'off');
-        if(wpt_setButton('bgd', 'different') === 1)
+        if(wpt_setButton('bgd', 'separate') === 1)
           {
             $id('bgd').parentNode.parentNode.style.height = (parseInt($id('bgd').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('bgd').parentNode.parentNode.firstChild.id] = parseInt($id('bgd').parentNode.parentNode.style.height);
@@ -917,7 +917,7 @@ function loadCSSexample(demo)
         
         //Thickness
         wpt_setButton('btonoff', 'off');
-        if(wpt_setButton('bordert', 'different') === 1)
+        if(wpt_setButton('bordert', 'separate') === 1)
           {
             $id('bordert').parentNode.parentNode.style.height = (parseInt($id('bordert').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('bordert').parentNode.parentNode.firstChild.id] = parseInt($id('bordert').parentNode.parentNode.style.height);
@@ -944,7 +944,7 @@ function loadCSSexample(demo)
         
         //Radius
         wpt_setButton('bradonoff', 'off');
-        if(wpt_setButton('borderd', 'different') === 1)
+        if(wpt_setButton('borderd', 'separate') === 1)
           {
             $id('borderd').parentNode.parentNode.style.height = (parseInt($id('borderd').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('borderd').parentNode.parentNode.firstChild.id] = parseInt($id('borderd').parentNode.parentNode.style.height);
@@ -968,7 +968,7 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('bsv').id);
         
         //Color
-        if(wpt_setButton('bscold', 'different') === 1)
+        if(wpt_setButton('bscold', 'separate') === 1)
           {
             $id('bscold').parentNode.parentNode.style.height = (parseInt($id('bscold').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('bscold').parentNode.parentNode.firstChild.id] = parseInt($id('bscold').parentNode.parentNode.style.height);
@@ -997,7 +997,7 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('tsv').id);
         
         //Color
-        if(wpt_setButton('tscold', 'different') === 1)
+        if(wpt_setButton('tscold', 'separate') === 1)
           {
             $id('tscold').parentNode.parentNode.style.height = (parseInt($id('tscold').parentNode.parentNode.style.height)+110)+'px';
             wpt_menu_items_height[$id('tscold').parentNode.parentNode.firstChild.id] = parseInt($id('tscold').parentNode.parentNode.style.height);
@@ -1045,9 +1045,9 @@ function loadCSSexample(demo)
       }
     else
       {
-        wpt_fold_all_out();
+        wpt_expand_all();
         loadCSSexample('clear');
-        wpt_fold_all_in();
+        wpt_collapse_all();
       }
     window.setTimeout(generate_css, 125);
   }
@@ -1116,7 +1116,7 @@ function wpt_fold_out(e)
   {
     if(!wpt_shift_key_status)
       {
-        wpt_fold_all_in();
+        wpt_collapse_all();
       }
     e.className += ' active';
     e.style.height = wpt_menu_items_height[e.firstChild.id]+'px';
@@ -1143,7 +1143,7 @@ function wpt_fold_toggle()
     
   }
 
-function wpt_fold_all_in()
+function wpt_collapse_all()
   {
     var menu_items = document.getElementsByClassName('wpt_contents');
     var menu_item, menu_item_height;
@@ -1163,7 +1163,7 @@ function wpt_fold_all_in()
     window.setTimeout(wpt_dialog, 225);
   }
 
-function wpt_fold_all_out()
+function wpt_expand_all()
   {
     var pre_shift_key_status = wpt_shift_key_status;
     var menu_items = document.getElementsByClassName('wpt_contents');
@@ -1175,6 +1175,27 @@ function wpt_fold_all_out()
           {
             wpt_shift_key_status = true;
             wpt_fold_out(menu_item.parentNode);
+          }
+      }
+    wpt_shift_key_status = pre_shift_key_status;
+  }
+
+function wpt_expand_enabled()
+  {
+  	wpt_collapse_all();
+    var pre_shift_key_status = wpt_shift_key_status;
+    var menu_items = document.getElementsByClassName('wpt_contents');
+    var menu_item, menu_item_height;
+    wpt_shift_key_status = true;
+    for(i in menu_items)
+      {
+        menu_item = menu_items[i];
+        if(typeof menu_item.className != 'undefined')
+          {
+            if(menu_item.childNodes[1].value == 'on')
+              {
+                wpt_fold_out(menu_item.parentNode);
+              }
           }
       }
     wpt_shift_key_status = pre_shift_key_status;
