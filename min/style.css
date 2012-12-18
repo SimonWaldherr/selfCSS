@@ -97,7 +97,7 @@ body{font:12px Tahoma,sans-serif;}
 #topbar .item{}
 #toolbar{z-index:2;position:absolute;left:0;top:0;right:0;height:44px;border-radius:6px 6px 0px 0px;}
 #toolbar .button{float:left;line-height:27px;margin:7px 0 0 7px;}
-#sidebar{z-index:1;position:absolute;text-align:left;left:0;top:45px;bottom:0;width:300px;padding:0 0 20px 0;-webkit-overflow-scrolling:touch;overflow-x:hidden;overflow-y:auto;border-radius:0px 0px 0px 8px;}
+#sidebar{z-index:1;position:absolute;text-align:left;left:0;top:45px;bottom:0;width:300px;padding:0 0 0 0;-webkit-overflow-scrolling:touch;overflow-x:hidden;overflow-y:auto;border-radius:0px 0px 0px 8px;}
 #sidebar .header{padding:15px 0 5px 15px;}
 #sidebar .item{position:relative;margin:0 0px;padding:0 40px;height:auto;overflow-y:hidden;transition:height 0.4s;-moz-transition:height 0.4s;-webkit-transition:height 0.4s;-o-transition:height 0.4s;}
 #sidebar .item .title{height:25px;font-weight:bold;line-height:25px;}
@@ -125,6 +125,7 @@ body{font:12px Tahoma,sans-serif;}
 #sidebar::-webkit-scrollbar{width:8px;}
 #sidebar::-webkit-scrollbar-track{border-radius:0px;}
 #sidebar::-webkit-scrollbar-thumb{-webkit-border-radius:2px;border-radius:2px;padding:5px;}
+#sidebar #sidebarend{height:20px;}
 #dialogs{display:none;}
 #dialog{z-index:4;position:absolute;left:50%;top:-600px;width:650px;margin-left:-325px;padding:20px;border-radius:3px;transition:all 0.4s;-moz-transition:all 0.4s;-webkit-transition:all 0.4s;-o-transition:all 0.4s;}
 #dialog .contents{padding-bottom:20px;line-height:16px;}

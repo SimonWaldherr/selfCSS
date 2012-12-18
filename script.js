@@ -134,7 +134,7 @@ function wpt_init_select()
               {
                 if(select_element.className.indexOf(' selected') != -1)
                   {
-                    selected = select_element.innerHTML;
+                    selected = select_element.className.replace("segment", "").replace("selected", "").replace("full", "").replace("percent", "%").trim();
                   }
                 select_element.addEventListener("click", wpt_change_selected, false);
               }
@@ -190,13 +190,13 @@ function wpt_change_selected()
     this.className += ' selected';
     if(container.id != '')
       {
-        $id('wpt_s'+container.id).value = this.innerHTML;
+        $id('wpt_s'+container.id).value = this.className.replace("segment", "", "gim").replace("selected", "", "gim").replace("full", "", "gim").replace("percent", "%", "gim").trim();
       }
     
-    if(this.innerHTML == 'common')
+    if(this.className.indexOf('common') !== -1)
       {
         var modevalue;
-        if($id('wpt_spaddd').value == 'common')
+        if($id('wpt_spaddd').value.indexOf('common') !== -1)
           {
             modevalue = $id('padtop').value;
             
@@ -210,7 +210,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('padbottom').id);
           }
 
-        if($id('wpt_smargd').value == 'common')
+        if($id('wpt_smargd').value.indexOf('common') !== -1)
           {
             modevalue = $id('martop').value;
             
@@ -224,7 +224,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('marbottom').id);
           }
 
-        if($id('wpt_sbgd').value == 'common')
+        if($id('wpt_sbgd').value.indexOf('common') !== -1)
           {
             modevalue = $id('bgred').value;
             
@@ -235,7 +235,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('bgblue').id);
           }
 
-        if($id('wpt_stcd').value == 'common')
+        if($id('wpt_stcd').value.indexOf('common') !== -1)
           {
             modevalue = $id('tcred').value;
             
@@ -246,7 +246,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('tcblue').id);
           }
 
-        if($id('wpt_sbordert').value == 'common')
+        if($id('wpt_sbordert').value.indexOf('common') !== -1)
           {
             modevalue = $id('bttop').value;
             
@@ -260,7 +260,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('btbottom').id);
           }
 
-        if($id('wpt_sbcd').value == 'common')
+        if($id('wpt_sbcd').value.indexOf('common') !== -1)
           {
             modevalue = $id('bcred').value;
             
@@ -271,7 +271,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('bcblue').id);
           }
 
-        if($id('wpt_sborderd').value == 'common')
+        if($id('wpt_sborderd').value.indexOf('common') !== -1)
           {
             modevalue = $id('brtl').value;
             
@@ -285,7 +285,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('brbl').id);
           }
 
-        if($id('wpt_sbscold').value == 'common')
+        if($id('wpt_sbscold').value.indexOf('common') !== -1)
           {
             modevalue = $id('bsred').value;
             
@@ -296,7 +296,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('bsblue').id);
           }
 
-        if($id('wpt_stscold').value == 'common')
+        if($id('wpt_stscold').value.indexOf('common') !== -1)
           {
             modevalue = $id('tsred').value;
             
@@ -317,15 +317,19 @@ function wpt_change_selected()
 function wpt_setButton(id, value)
   {
     var button, status;
+    value = value.replace("segment", "", "gim").replace("selected", "", "gim").replace("full", "", "gim").replace("percent", "%", "gim").trim();
     button = $id(id);
     for(x in button.childNodes)
       {
-        if(button.childNodes[x].innerHTML == value)
+        if(typeof button.childNodes[x].className !== 'undefined')
           {
-            status = 1;
-            if(button.childNodes[x].className.indexOf(' selected') != -1)
+            if(button.childNodes[x].className.indexOf(value) !== -1)
               {
-                return 0;
+                status = 1;
+                if(button.childNodes[x].className.indexOf(' selected') != -1)
+                  {
+                    return 0;
+                  }
               }
           }
       }
@@ -336,7 +340,7 @@ function wpt_setButton(id, value)
             if(typeof button.childNodes[x].className != 'undefined')
               {
                 button.childNodes[x].className = button.childNodes[x].className.replace(' selected', '');
-                if(button.childNodes[x].innerHTML == value)
+                if(button.childNodes[x].className.indexOf(value) !== -1)
                   {
                     button.childNodes[x].className += ' selected';
                   }
@@ -355,13 +359,13 @@ function wpt_slider_changed(value, menu)
   {
     if(initialized == true)
       {
-        var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id
+        var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id;
         var modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
-        var modevalue = value
+        var modevalue = value;
         
         switch (modemenu) {
           case "Main-Padding":
-            if($id('wpt_spaddd').value == 'common')
+            if($id('wpt_spaddd').value.indexOf('common') !== -1)
               {
                 if(modevalue != $id('padtop').value)
                   {
@@ -389,7 +393,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "Main-Margin":
-            if($id('wpt_smargd').value == 'common')
+            if($id('wpt_smargd').value.indexOf('common') !== -1)
               {
                 if(modevalue != $id('martop').value)
                   {
@@ -417,7 +421,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "Background-Color":
-            if(($id('wpt_sbgd').value == 'common')&&(modesubmenu != 'Opacity:'))
+            if(($id('wpt_sbgd').value.indexOf('common') !== -1)&&(modesubmenu != 'Opacity:'))
               {
                 if(modevalue != $id('bgred').value)
                   {
@@ -439,7 +443,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "Text-Color":
-            if(($id('wpt_stcd').value == 'common')&&(modesubmenu != 'Opacity:'))
+            if(($id('wpt_stcd').value.indexOf('common') !== -1)&&(modesubmenu != 'Opacity:'))
               {
                 if(modevalue != $id('tcred').value)
                   {
@@ -461,7 +465,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "Border-Thickness":
-            if($id('wpt_sbordert').value == 'common')
+            if($id('wpt_sbordert').value.indexOf('common') !== -1)
               {
                 if(modevalue != $id('bttop').value)
                   {
@@ -489,7 +493,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "Border-Color":
-            if($id('wpt_sbcd').value == 'common')
+            if($id('wpt_sbcd').value.indexOf('common') !== -1)
               {
                 if(modevalue != $id('bcred').value)
                   {
@@ -511,7 +515,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "Border-Radius":
-            if($id('wpt_sborderd').value == 'common')
+            if($id('wpt_sborderd').value.indexOf('common') !== -1)
               {
                 if(modevalue != $id('brtl').value)
                   {
@@ -539,7 +543,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "BS-Color":
-            if(($id('wpt_sbscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+            if(($id('wpt_sbscold').value.indexOf('common') !== -1)&&(modesubmenu != 'Opacity:'))
               {
                 if(modevalue != $id('bsred').value)
                   {
@@ -561,7 +565,7 @@ function wpt_slider_changed(value, menu)
               }
             break;
           case "TS-Color":
-            if(($id('wpt_stscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+            if(($id('wpt_stscold').value.indexOf('common') !== -1)&&(modesubmenu != 'Opacity:'))
               {
                 if(modevalue != $id('tsred').value)
                   {
@@ -640,7 +644,7 @@ function generate_css()
     var value1, value2, value3, value4, color, inset, css = '.selfCSS { \n';
     
     //position
-    if($id('wpt_sposonoff').value == 'on')
+    if($id('wpt_sposonoff').value.indexOf('on') !== -1)
       {
         css += '  position: '+$id('wpt_spostype1').value+'; \n';
         css += '  top: '+$id('postop').value+$id('wpt_spostype2').value+'; \n';
@@ -650,7 +654,7 @@ function generate_css()
       }
     
     //size
-    if($id('wpt_ssizeonoff').value == 'on')
+    if($id('wpt_ssizeonoff').value.indexOf('on') !== -1)
       {
         if($id('height').value == '0')
           {
@@ -673,7 +677,7 @@ function generate_css()
     
     
     //padding
-    if($id('wpt_spadonoff').value == 'on')
+    if($id('wpt_spadonoff').value.indexOf('on') !== -1)
       {
         if($id('wpt_spaddd').value == 'common')
           {
@@ -687,7 +691,7 @@ function generate_css()
     
     
     //margin
-    if($id('wpt_smargonoff').value == 'on')
+    if($id('wpt_smargonoff').value.indexOf('on') !== -1)
       {
         if($id('martop').value != '-101')
           {
@@ -737,7 +741,7 @@ function generate_css()
     
     
     //display
-    if($id('wpt_sdisponoff').value == 'on')
+    if($id('wpt_sdisponoff').value.indexOf('on') !== -1)
       {
         css += '  display: '+$id('wpt_sdisplayt').value+'; \n';
       }
@@ -820,7 +824,7 @@ function generate_css()
               }
             else
               {
-                css += '  color: rgba('+$id('tcred').value+', '+$id('tcred').value+', '+$id('tcred').value+', '+$id('tcalpha').value+');';
+                css += '  color: rgba('+$id('tcred').value+', '+$id('tcred').value+', '+$id('tcred').value+', '+$id('tcalpha').value+'); \n';
               }
             
           }
@@ -832,7 +836,7 @@ function generate_css()
               }
             else
               {
-                css += '  color: rgba('+$id('tcred').value+', '+$id('tcgreen').value+', '+$id('tcblue').value+', '+$id('tcalpha').value+');';
+                css += '  color: rgba('+$id('tcred').value+', '+$id('tcgreen').value+', '+$id('tcblue').value+', '+$id('tcalpha').value+'); \n';
               }
           }
       }
@@ -1037,6 +1041,8 @@ function generate_css()
       }
     
     css += '}';
+    
+    css = css.replace(/(\s+);/,";");
     $id('editable_style').innerHTML = css;
     $id('CSSbox').innerHTML = css;
     $id('CSStextarea').value = css;

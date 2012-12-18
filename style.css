@@ -96,7 +96,7 @@ body {
     top: 45px;
     bottom: 0;
     width: 300px;
-    padding: 0 0 20px 0;
+    padding: 0 0 0 0;
     -webkit-overflow-scrolling: touch;
     overflow-x: hidden;
     overflow-y: auto;
@@ -247,6 +247,10 @@ body {
     -webkit-border-radius: 2px;
     border-radius: 2px;
     padding: 5px;
+}
+
+#sidebar #sidebarend {
+    height: 20px;
 }
 
 #dialogs {
