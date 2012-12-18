@@ -5,7 +5,6 @@ function $id(id)
 
 var wpt_device_type = false;
 var wpt_shift_key_status = false;
-var wpt_selected_slider = '';
 var initialized = false;
 
 function wpt_init()
@@ -18,11 +17,10 @@ function wpt_init()
     $id('loadingstat').innerHTML += '.';
     wpt_set_device_type();
     $id('loadingstat').innerHTML += '.';
-    wpt_init_slider_ident();
-    $id('loadingstat').innerHTML += '.';
     window.setTimeout(wpt_collapse_all,150);
     var menu_title, count = 0;
     var menu_titles = document.getElementsByClassName('wpt_contents');
+    wpt_device_specific();
     
     for(i in menu_titles)
       {
@@ -37,7 +35,6 @@ function wpt_init()
     document.body.addEventListener("keyup", wpt_keyrelease, false);
     window.setTimeout(insert_sm, 225);
     
-    wpt_device_specific();
     loadCSSexample('text');
     initialized = true;
   }
@@ -122,21 +119,6 @@ function wpt_init_fd_slider()
       }
   }
 
-function wpt_init_slider_ident()
-  {
-    var sliders = document.getElementById('sidebar').getElementsByClassName('fd-slider-handle');
-    
-    for(i in sliders)
-      {
-        if(typeof sliders[i] === 'object')
-          {
-            sliders[i].addEventListener("onmousedown", wpt_set_selected_slider, false);
-            sliders[i].addEventListener("ontouchstart", wpt_set_selected_slider, false);
-          }
-       
-      }
-  }
-
 function wpt_init_select()
   {
     var inputbox, selected, select_eles, select_element;
@@ -169,13 +151,6 @@ function wpt_init_select()
             select_boxes[x].parentNode.insertBefore(inputbox, select_boxes[x]);
           }
       }
-  }
-
-function wpt_set_selected_slider()
-  {
-    alert('test');
-    console.log(this.parentNode.parentNode.parentNode.parentNode.parentNode.innerHTML);
-    wpt_selected_slider = '';
   }
 
 function wpt_device_specific()
@@ -217,18 +192,6 @@ function wpt_change_selected()
       {
         $id('wpt_s'+container.id).value = this.innerHTML;
       }
-    /*
-    if(this.innerHTML == 'common')
-      {
-        this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)-same_diff_height)+'px';
-        wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]-same_diff_height);
-      }
-    else if(this.innerHTML == 'separate')
-      {
-        this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)+same_diff_height)+'px';
-        wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]+same_diff_height);
-      }
-    */
     
     if(this.innerHTML == 'common')
       {
