@@ -93,9 +93,9 @@ body {
     background: -ms-linear-gradient(top, rgba(21,102,177,1) 0%,rgba(17,80,151,1) 100%);
     background: linear-gradient(to bottom, rgba(21,102,177,1) 0%,rgba(17,80,151,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1566b1', endColorstr='#115097',GradientType=0 );
-    box-shadow: inset 0 0 10px #070707, inset 0 0 5px #070707, 0 1px 0 #4B4947;
-    -moz-box-shadow: inset 0 0 10px #070707, inset 0 0 5px #070707, 0 1px 0 #4B4947;
-    -webkit-box-shadow: inset 0 0 10px #070707, inset 0 0 5px #070707, 0 1px 0 #4B4947;
+    box-shadow: inset 0 0 10px -2px #070707, inset 0 0 5px #070707, 0 1px 0 #4B4947;
+    -moz-box-shadow: inset 0 0 10px -2px #070707, inset 0 0 5px #070707, 0 1px 0 #4B4947;
+    -webkit-box-shadow: inset 0 0 10px -2px #070707, inset 0 0 5px #070707, 0 1px 0 #4B4947;
 }
 
 #sidebar .item .wpt_contents .curves {

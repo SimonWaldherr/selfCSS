@@ -994,7 +994,7 @@ var fdSlider = (function() {
                 function setInputValue(val) {
                         // The update callback doesn't mean the input value has changed
                         callback("update");
-                        wpt_slider_changed();
+                        wpt_slider_changed(val, innerWrapper);
 
                         // If the user has not set this value or has entered an incorrect value then set a class
                         // to enable styling of the slider

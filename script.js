@@ -5,6 +5,8 @@ function $id(id)
 
 var wpt_device_type = false;
 var wpt_shift_key_status = false;
+var wpt_selected_slider = '';
+var initialized = false;
 
 function wpt_init()
   {
@@ -15,6 +17,9 @@ function wpt_init()
     wpt_save_items_height();
     $id('loadingstat').innerHTML += '.';
     wpt_set_device_type();
+    $id('loadingstat').innerHTML += '.';
+    wpt_init_slider_ident();
+    $id('loadingstat').innerHTML += '.';
     window.setTimeout(wpt_collapse_all,150);
     var menu_title, count = 0;
     var menu_titles = document.getElementsByClassName('wpt_contents');
@@ -34,6 +39,7 @@ function wpt_init()
     
     wpt_device_specific();
     loadCSSexample('text');
+    initialized = true;
   }
 
 function wpt_set_device_type()
@@ -116,6 +122,21 @@ function wpt_init_fd_slider()
       }
   }
 
+function wpt_init_slider_ident()
+  {
+    var sliders = document.getElementById('sidebar').getElementsByClassName('fd-slider-handle');
+    
+    for(i in sliders)
+      {
+        if(typeof sliders[i] === 'object')
+          {
+            sliders[i].addEventListener("onmousedown", wpt_set_selected_slider, false);
+            sliders[i].addEventListener("ontouchstart", wpt_set_selected_slider, false);
+          }
+       
+      }
+  }
+
 function wpt_init_select()
   {
     var inputbox, selected, select_eles, select_element;
@@ -148,6 +169,13 @@ function wpt_init_select()
             select_boxes[x].parentNode.insertBefore(inputbox, select_boxes[x]);
           }
       }
+  }
+
+function wpt_set_selected_slider()
+  {
+    alert('test');
+    console.log(this.parentNode.parentNode.parentNode.parentNode.parentNode.innerHTML);
+    wpt_selected_slider = '';
   }
 
 function wpt_device_specific()
@@ -189,6 +217,7 @@ function wpt_change_selected()
       {
         $id('wpt_s'+container.id).value = this.innerHTML;
       }
+    /*
     if(this.innerHTML == 'common')
       {
         this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)-same_diff_height)+'px';
@@ -199,6 +228,101 @@ function wpt_change_selected()
         this.parentNode.parentNode.parentNode.style.height = (parseInt(this.parentNode.parentNode.parentNode.style.height)+same_diff_height)+'px';
         wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id] = (wpt_menu_items_height[this.parentNode.parentNode.parentNode.firstChild.id]+same_diff_height);
       }
+    */
+    
+    if(this.innerHTML == 'common')
+      {
+        var modevalue;
+        if($id('wpt_spaddd').value == 'common')
+          {
+            modevalue = $id('padtop').value;
+            
+            $id('padleft').value = modevalue;
+            fdSlider.updateSlider($id('padleft').id);
+            
+            $id('padright').value = modevalue;
+            fdSlider.updateSlider($id('padright').id);
+            
+            $id('padbottom').value = modevalue;
+            fdSlider.updateSlider($id('padbottom').id);
+          }
+
+        if($id('wpt_smargd').value == 'common')
+          {
+            modevalue = $id('martop').value;
+            
+            $id('marleft').value = modevalue;
+            fdSlider.updateSlider($id('marleft').id);
+            
+            $id('marright').value = modevalue;
+            fdSlider.updateSlider($id('marright').id);
+            
+            $id('marbottom').value = modevalue;
+            fdSlider.updateSlider($id('marbottom').id);
+          }
+
+        if(($id('wpt_sbgd').value == 'common')&&(modesubmenu != 'Opacity:'))
+          {
+            modevalue = $id('bgred').value;
+            
+            $id('bggreen').value = modevalue;
+            fdSlider.updateSlider($id('bggreen').id);
+            
+            $id('bgblue').value = modevalue;
+            fdSlider.updateSlider($id('bgblue').id);
+          }
+
+        if($id('wpt_sbordert').value == 'common')
+          {
+            modevalue = $id('bttop').value;
+            
+            $id('btleft').value = modevalue;
+            fdSlider.updateSlider($id('btleft').id);
+            
+            $id('btright').value = modevalue;
+            fdSlider.updateSlider($id('btright').id);
+            
+            $id('btbottom').value = modevalue;
+            fdSlider.updateSlider($id('btbottom').id);
+          }
+
+        if($id('wpt_sborderd').value == 'common')
+          {
+            modevalue = $id('brtl').value;
+            
+            $id('brtr').value = modevalue;
+            fdSlider.updateSlider($id('brtr').id);
+            
+            $id('brbr').value = modevalue;
+            fdSlider.updateSlider($id('brbr').id);
+            
+            $id('brbl').value = modevalue;
+            fdSlider.updateSlider($id('brbl').id);
+          }
+
+        if(($id('wpt_sbscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+          {
+            modevalue = $id('bsred').value;
+            
+            $id('bsgreen').value = modevalue;
+            fdSlider.updateSlider($id('bsgreen').id);
+            
+            $id('bsblue').value = modevalue;
+            fdSlider.updateSlider($id('bsblue').id);
+          }
+
+        if(($id('wpt_stscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+          {
+            modevalue = $id('tsred').value;
+            
+            $id('tsgreen').value = modevalue;
+            fdSlider.updateSlider($id('tsgreen').id);
+            
+            $id('tsblue').value = modevalue;
+            fdSlider.updateSlider($id('tsblue').id);
+          }
+      }
+    
     if(this.onclick == null)
       {
         window.setTimeout(generate_css, 125);
@@ -242,8 +366,198 @@ function wpt_setButton(id, value)
       }
   }
 
-function wpt_slider_changed()
+function wpt_slider_changed(value, menu)
   {
+    if(initialized == true)
+      {
+        var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id
+        var modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
+        var modevalue = value
+        
+        switch (modemenu) {
+          case "Main-Padding":
+            if($id('wpt_spaddd').value == 'common')
+              {
+                if(modevalue != $id('padtop').value)
+                  {
+                    $id('padtop').value = modevalue;
+                    fdSlider.updateSlider($id('padtop').id);
+                  }
+                
+                if(modevalue != $id('padleft').value)
+                  {
+                    $id('padleft').value = modevalue;
+                    fdSlider.updateSlider($id('padleft').id);
+                  }
+                
+                if(modevalue != $id('padright').value)
+                  {
+                    $id('padright').value = modevalue;
+                    fdSlider.updateSlider($id('padright').id);
+                  }
+                
+                if(modevalue != $id('padbottom').value)
+                  {
+                    $id('padbottom').value = modevalue;
+                    fdSlider.updateSlider($id('padbottom').id);
+                  }
+              }
+            break;
+          case "Main-Margin":
+            if($id('wpt_smargd').value == 'common')
+              {
+                if(modevalue != $id('martop').value)
+                  {
+                    $id('martop').value = modevalue;
+                    fdSlider.updateSlider($id('martop').id);
+                  }
+                
+                if(modevalue != $id('marleft').value)
+                  {
+                    $id('marleft').value = modevalue;
+                    fdSlider.updateSlider($id('marleft').id);
+                  }
+                
+                if(modevalue != $id('marright').value)
+                  {
+                    $id('marright').value = modevalue;
+                    fdSlider.updateSlider($id('marright').id);
+                  }
+                
+                if(modevalue != $id('marbottom').value)
+                  {
+                    $id('marbottom').value = modevalue;
+                    fdSlider.updateSlider($id('marbottom').id);
+                  }
+              }
+            break;
+          case "Background-Color":
+            if(($id('wpt_sbgd').value == 'common')&&(modesubmenu != 'Opacity:'))
+              {
+                if(modevalue != $id('bgred').value)
+                  {
+                    $id('bgred').value = modevalue;
+                    fdSlider.updateSlider($id('bgred').id);
+                  }
+                
+                if(modevalue != $id('bggreen').value)
+                  {
+                    $id('bggreen').value = modevalue;
+                    fdSlider.updateSlider($id('bggreen').id);
+                  }
+                
+                if(modevalue != $id('bgblue').value)
+                  {
+                    $id('bgblue').value = modevalue;
+                    fdSlider.updateSlider($id('bgblue').id);
+                  }
+              }
+            break;
+          case "Border-Thickness":
+            if($id('wpt_sbordert').value == 'common')
+              {
+                if(modevalue != $id('bttop').value)
+                  {
+                    $id('bttop').value = modevalue;
+                    fdSlider.updateSlider($id('bttop').id);
+                  }
+                
+                if(modevalue != $id('btleft').value)
+                  {
+                    $id('btleft').value = modevalue;
+                    fdSlider.updateSlider($id('btleft').id);
+                  }
+                
+                if(modevalue != $id('btright').value)
+                  {
+                    $id('btright').value = modevalue;
+                    fdSlider.updateSlider($id('btright').id);
+                  }
+                
+                if(modevalue != $id('btbottom').value)
+                  {
+                    $id('btbottom').value = modevalue;
+                    fdSlider.updateSlider($id('btbottom').id);
+                  }
+              }
+            break;
+          case "Border-Radius":
+            if($id('wpt_sborderd').value == 'common')
+              {
+                if(modevalue != $id('brtl').value)
+                  {
+                    $id('brtl').value = modevalue;
+                    fdSlider.updateSlider($id('brtl').id);
+                  }
+                
+                if(modevalue != $id('brtr').value)
+                  {
+                    $id('brtr').value = modevalue;
+                    fdSlider.updateSlider($id('brtr').id);
+                  }
+                
+                if(modevalue != $id('brbr').value)
+                  {
+                    $id('brbr').value = modevalue;
+                    fdSlider.updateSlider($id('brbr').id);
+                  }
+                
+                if(modevalue != $id('brbl').value)
+                  {
+                    $id('brbl').value = modevalue;
+                    fdSlider.updateSlider($id('brbl').id);
+                  }
+              }
+            break;
+          case "BS-Color":
+            if(($id('wpt_sbscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+              {
+                if(modevalue != $id('bsred').value)
+                  {
+                    $id('bsred').value = modevalue;
+                    fdSlider.updateSlider($id('bsred').id);
+                  }
+                
+                if(modevalue != $id('bsgreen').value)
+                  {
+                    $id('bsgreen').value = modevalue;
+                    fdSlider.updateSlider($id('bsgreen').id);
+                  }
+                
+                if(modevalue != $id('bsblue').value)
+                  {
+                    $id('bsblue').value = modevalue;
+                    fdSlider.updateSlider($id('bsblue').id);
+                  }
+              }
+            break;
+          case "TS-Color":
+            if(($id('wpt_stscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+              {
+                if(modevalue != $id('tsred').value)
+                  {
+                    $id('tsred').value = modevalue;
+                    fdSlider.updateSlider($id('tsred').id);
+                  }
+                
+                if(modevalue != $id('tsgreen').value)
+                  {
+                    $id('tsgreen').value = modevalue;
+                    fdSlider.updateSlider($id('tsgreen').id);
+                  }
+                
+                if(modevalue != $id('tsblue').value)
+                  {
+                    $id('tsblue').value = modevalue;
+                    fdSlider.updateSlider($id('tsblue').id);
+                  }
+              }
+            break;
+          default:
+            break;
+        }
+      }
+    
     window.setTimeout(generate_css, 125);
   }
 
