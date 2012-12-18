@@ -261,7 +261,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('marbottom').id);
           }
 
-        if(($id('wpt_sbgd').value == 'common')&&(modesubmenu != 'Opacity:'))
+        if($id('wpt_sbgd').value == 'common')
           {
             modevalue = $id('bgred').value;
             
@@ -270,6 +270,17 @@ function wpt_change_selected()
             
             $id('bgblue').value = modevalue;
             fdSlider.updateSlider($id('bgblue').id);
+          }
+
+        if($id('wpt_stcd').value == 'common')
+          {
+            modevalue = $id('tcred').value;
+            
+            $id('tcgreen').value = modevalue;
+            fdSlider.updateSlider($id('tcgreen').id);
+            
+            $id('tcblue').value = modevalue;
+            fdSlider.updateSlider($id('tcblue').id);
           }
 
         if($id('wpt_sbordert').value == 'common')
@@ -286,6 +297,17 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('btbottom').id);
           }
 
+        if($id('wpt_sbcd').value == 'common')
+          {
+            modevalue = $id('bcred').value;
+            
+            $id('bcgreen').value = modevalue;
+            fdSlider.updateSlider($id('bcgreen').id);
+            
+            $id('bcblue').value = modevalue;
+            fdSlider.updateSlider($id('bcblue').id);
+          }
+
         if($id('wpt_sborderd').value == 'common')
           {
             modevalue = $id('brtl').value;
@@ -300,7 +322,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('brbl').id);
           }
 
-        if(($id('wpt_sbscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+        if($id('wpt_sbscold').value == 'common')
           {
             modevalue = $id('bsred').value;
             
@@ -311,7 +333,7 @@ function wpt_change_selected()
             fdSlider.updateSlider($id('bsblue').id);
           }
 
-        if(($id('wpt_stscold').value == 'common')&&(modesubmenu != 'Opacity:'))
+        if($id('wpt_stscold').value == 'common')
           {
             modevalue = $id('tsred').value;
             
@@ -453,6 +475,28 @@ function wpt_slider_changed(value, menu)
                   }
               }
             break;
+          case "Text-Color":
+            if(($id('wpt_stcd').value == 'common')&&(modesubmenu != 'Opacity:'))
+              {
+                if(modevalue != $id('tcred').value)
+                  {
+                    $id('tcred').value = modevalue;
+                    fdSlider.updateSlider($id('tcred').id);
+                  }
+                
+                if(modevalue != $id('tcgreen').value)
+                  {
+                    $id('tcgreen').value = modevalue;
+                    fdSlider.updateSlider($id('tcgreen').id);
+                  }
+                
+                if(modevalue != $id('tcblue').value)
+                  {
+                    $id('tcblue').value = modevalue;
+                    fdSlider.updateSlider($id('tcblue').id);
+                  }
+              }
+            break;
           case "Border-Thickness":
             if($id('wpt_sbordert').value == 'common')
               {
@@ -478,6 +522,28 @@ function wpt_slider_changed(value, menu)
                   {
                     $id('btbottom').value = modevalue;
                     fdSlider.updateSlider($id('btbottom').id);
+                  }
+              }
+            break;
+          case "Border-Color":
+            if($id('wpt_sbcd').value == 'common')
+              {
+                if(modevalue != $id('bcred').value)
+                  {
+                    $id('bcred').value = modevalue;
+                    fdSlider.updateSlider($id('bcred').id);
+                  }
+                
+                if(modevalue != $id('bcgreen').value)
+                  {
+                    $id('bcgreen').value = modevalue;
+                    fdSlider.updateSlider($id('bcgreen').id);
+                  }
+                
+                if(modevalue != $id('bcblue').value)
+                  {
+                    $id('bcblue').value = modevalue;
+                    fdSlider.updateSlider($id('bcblue').id);
                   }
               }
             break;
@@ -783,13 +849,28 @@ function generate_css()
     //color
     if($id('wpt_stconoff').value == 'on')
       {
-        if($id('wpt_smargd').value == 'common')
+        if($id('wpt_stcd').value == 'common')
           {
-            css += '  color: '+getColor('tcred', 'tcred', 'tcred')+'; \n';
+            if($id('tcalpha').value == '1')
+              {
+                css += '  color: '+getColor('tcred', 'tcred', 'tcred')+'; \n';
+              }
+            else
+              {
+                css += '  color: rgba('+$id('tcred').value+', '+$id('tcred').value+', '+$id('tcred').value+', '+$id('tcalpha').value+');';
+              }
+            
           }
         else
           {
-            css += '  color: '+getColor('tcred', 'tcgreen', 'tcblue')+'; \n';
+            if($id('tcalpha').value == '1')
+              {
+                css += '  color: '+getColor('tcred', 'tcgreen', 'tcblue')+'; \n';
+              }
+            else
+              {
+                css += '  color: rgba('+$id('tcred').value+', '+$id('tcgreen').value+', '+$id('tcblue').value+', '+$id('tcalpha').value+');';
+              }
           }
       }
     
@@ -823,7 +904,14 @@ function generate_css()
       {
         if($id('wpt_sbordert').value == 'common')
           {
-            css += '  border: '+$id('bttop').value+'px '+getColor('bcred', 'bcgreen', 'bcblue')+' '+$id('wpt_sbtype').value+'; \n';
+            if($id('bcalpha').value == '1')
+              {
+                css += '  border: '+$id('bttop').value+'px '+getColor('bcred', 'bcgreen', 'bcblue')+' '+$id('wpt_sbtype').value+'; \n';
+              }
+            else
+              {
+                css += '  border: '+$id('bttop').value+'px rgba('+$id('bcred').value+', '+$id('bcgreen').value+', '+$id('bcblue').value+', '+$id('bcalpha').value+') '+$id('wpt_sbtype').value+'; \n';
+              }
           }
         else
           {
@@ -831,7 +919,15 @@ function generate_css()
             css += '  border-left: '+$id('btleft').value+'px; \n';
             css += '  border-right: '+$id('btright').value+'px; \n';
             css += '  border-bottom: '+$id('btbottom').value+'px; \n';
-            css += '  border-color: '+getColor('bcred', 'bcgreen', 'bcblue')+'; \n';
+            if($id('bcalpha').value == '1')
+              {
+                css += '  border-color: '+getColor('bcred', 'bcgreen', 'bcblue')+'; \n';
+              }
+            else
+              {
+                css += '  border-color: rgba('+$id('bcred').value+', '+$id('bcgreen').value+', '+$id('bcblue').value+', '+$id('bcalpha').value+'); \n';
+              }
+            
             css += '  border-style: '+$id('wpt_sbtype').value+'; \n';
           }
       }
@@ -852,7 +948,14 @@ function generate_css()
       {
         if($id('wpt_sbscold').value == 'common')
           {
-            color = getColor('bsred', 'bsred', 'bsred');
+            if($id('bsalpha').value == '1')
+              {
+                color = getColor('bsred', 'bsgreen', 'bsblue');
+              }
+            else
+              {
+                color = 'rgba('+$id('bsred').value+', '+$id('bsred').value+', '+$id('bsred').value+', '+$id('bsalpha').value+')';
+              }
           }
         else
           {
@@ -881,7 +984,14 @@ function generate_css()
       {
         if($id('wpt_stscold').value == 'common')
           {
-            color = getColor('tsred', 'tsred', 'tsred');
+            if($id('tsalpha').value == '1')
+              {
+                color = getColor('tsred', 'tsred', 'tsred');
+              }
+            else
+              {
+                color = 'rgba('+$id('tsred').value+', '+$id('tsred').value+', '+$id('tsred').value+', '+$id('tsalpha').value+')';
+              }
           }
         else
           {
@@ -1293,7 +1403,7 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('bsgreen').id);
         $id('bsblue').value = 0;
         fdSlider.updateSlider($id('bsblue').id);
-        $id('bsalpha').value = 0;
+        $id('bsalpha').value = 1;
         fdSlider.updateSlider($id('bsalpha').id);
         
         //Blur
@@ -1322,7 +1432,7 @@ function loadCSSexample(demo)
         fdSlider.updateSlider($id('tsgreen').id);
         $id('tsblue').value = 0;
         fdSlider.updateSlider($id('tsblue').id);
-        $id('tsalpha').value = 0;
+        $id('tsalpha').value = 1;
         fdSlider.updateSlider($id('tsalpha').id);
         
         //Blur
