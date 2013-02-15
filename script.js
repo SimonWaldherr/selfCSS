@@ -36,6 +36,7 @@ function wpt_init()
     window.setTimeout(insert_sm, 225);
     
     loadCSSexample('text');
+    ptr_init();
     initialized = true;
   }
 
@@ -362,6 +363,12 @@ function wpt_slider_changed(value, menu)
         var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id;
         var modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
         var modevalue = value;
+        
+        if(menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML == 'Background:')
+        {
+          $id('box').style.background = getColor('bgslider','bgslider','bgslider');
+          return false;
+        }
         
         switch (modemenu) {
           case "Main-Padding":

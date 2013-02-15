@@ -461,6 +461,21 @@ body {
     -webkit-user-select: auto;
 }
 
+#backgroundslider {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 360px;
+    height: 30px;
+    padding: 15px 20px 0px 20px;
+    background: #3B3937;
+    border-radius: 10px 0px 4px 0px;
+}
+
+#backgroundslider input {
+    display: none;
+}
+
 #toolbar #foldin_btn {
     margin-left: 50px;
 }

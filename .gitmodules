@@ -7,3 +7,6 @@
 [submodule "submodules/fd-slider"]
 	path = submodules/fd-slider
 	url = https://github.com/freqdec/fd-slider
+[submodule "submodules/pulltorefresh"]
+	path = submodules/pulltorefresh
+	url = https://SimonWaldherr@github.com/SimonWaldherr/PullToRefresh.git

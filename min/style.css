@@ -155,6 +155,8 @@ body{font:12px Tahoma,sans-serif;}
 #editor{position:absolute;top:45px;left:300px;bottom:0px;right:0px;margin:0px;padding:25px;overflow:auto;display:inline-block;-moz-user-select:auto;-webkit-user-select:auto;}
 #editorCSS,#editorHTML{display:none;}
 #CSSbox{background:#ccc;overflow:auto;height:auto;text-shadow:none;margin:0px;-moz-user-select:auto;-webkit-user-select:auto;}
+#backgroundslider{position:absolute;bottom:0px;right:0px;width:360px;height:30px;padding:15px 20px 0px 20px;background:#3B3937;border-radius:10px 0px 4px 0px;}
+#backgroundslider input{display: none;}
 #toolbar #foldin_btn{margin-left:50px;}
 #examples_btn{position:absolute;right:200px;}
 #dialog{top:200px;display:block;}
