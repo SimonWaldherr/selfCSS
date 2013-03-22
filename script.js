@@ -364,7 +364,7 @@ function wpt_slider_changed(value, menu)
         var modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
         var modevalue = value;
         
-        if(menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML == 'Background:')
+        if((menu.parentNode.parentNode.parentNode.childNodes[0].innerHTML == 'Background:')||(menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML == 'Background:'))
         {
           $id('box').style.background = getColor('bgslider','bgslider','bgslider');
           return false;

@@ -1,0 +1,1 @@
+./compressjs.sh script.js ./submodules/add2home/src/add2home.js fd-slider.js prettify.js ./submodules/pulltorefresh/ptr.js

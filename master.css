@@ -1,0 +1,6 @@
+/* master.css */
+@import url(./submodules/fd-slider/css/fd-slider.css);
+@import url(./submodules/add2home/style/add2home.css);
+@import url(./style.css);
+@import url(./dark.css);
+@import url(./prettify.css);
