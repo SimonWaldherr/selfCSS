@@ -646,9 +646,59 @@ function getColor(red_id, green_id, blue_id)
     return '#'+colorred+colorgreen+colorblue;
   }
 
+var cssobjects = {};
+
 function generate_css()
   {
     var value1, value2, value3, value4, color, inset, css = '.selfCSS { \n';
+    
+    cssobjects.position = {};
+    cssobjects.position.onoff = $id('wpt_sposonoff').value;
+    cssobjects.position.pos = $id('wpt_spostype1').value;
+    cssobjects.position.type = $id('wpt_spostype2').value;
+    cssobjects.position.top = $id('postop').value;
+    cssobjects.position.left = $id('posleft').value;
+    cssobjects.position.right = $id('posright').value;
+    cssobjects.position.bottom = $id('posbottom').value;
+    
+    cssobjects.size = {};
+    cssobjects.size.onoff = $id('wpt_ssizeonoff').value;
+    cssobjects.size.type = $id('wpt_ssizetype').value;
+    cssobjects.size.height = $id('height').value;
+    cssobjects.size.width = $id('width').value;
+    
+    cssobjects.padding = {};
+    cssobjects.padding.onoff = $id('wpt_spadonoff').value;
+    cssobjects.padding.common = $id('wpt_spaddd').value;
+    cssobjects.padding.top = $id('padtop').value;
+    cssobjects.padding.left = $id('padleft').value;
+    cssobjects.padding.right = $id('padright').value;
+    cssobjects.padding.bottom = $id('padbottom').value;
+    
+    cssobjects.margin = {};
+    cssobjects.margin.onoff = $id('wpt_smargonoff').value;
+    cssobjects.margin.common = $id('wpt_smargd').value;
+    cssobjects.margin.top = $id('martop').value;
+    cssobjects.margin.left = $id('marleft').value;
+    cssobjects.margin.right = $id('marright').value;
+    cssobjects.margin.bottom = $id('marbottom').value;
+    
+    cssobjects.display = {};
+    cssobjects.display.onoff = $id('wpt_sdisponoff').value;
+    cssobjects.display.type = $id('wpt_sdisplayt').value;
+    
+    cssobjects.background = {};
+    cssobjects.background.onoff = $id('wpt_sbgonoff').value;
+    cssobjects.background.alpha = $id('bgalpha').value;
+    cssobjects.background.red = $id('bgred').value;
+    cssobjects.background.green = $id('bggreen').value;
+    cssobjects.background.blue = $id('bgblue').value;
+    cssobjects.background.common = $id('wpt_sbgd').value;
+    cssobjects.background.img = $id('wpt_sbackgroundimg').value;
+    
+    
+    
+    console.log(cssobjects);
     
     //position
     if($id('wpt_sposonoff').value.indexOf('on') !== -1)
