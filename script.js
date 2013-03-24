@@ -3,12 +3,15 @@ function $id(id)
     return document.getElementById(id);
   }
 
-var wpt_device_type = false;
-var wpt_shift_key_status = false;
-var initialized = false;
+var wpt_device_type = false,
+    wpt_shift_key_status = false,
+    initialized = false,
+    cssobjects = {};
 
 function wpt_init()
   {
+    var menu_title, count = 0,
+        menu_titles = document.getElementsByClassName('wpt_contents');
     wpt_init_fd_slider();
     $id('loadingstat').innerHTML += '.';
     wpt_init_select();
@@ -18,8 +21,6 @@ function wpt_init()
     wpt_set_device_type();
     $id('loadingstat').innerHTML += '.';
     window.setTimeout(wpt_collapse_all,150);
-    var menu_title, count = 0;
-    var menu_titles = document.getElementsByClassName('wpt_contents');
     wpt_device_specific();
     
     for(i in menu_titles)
@@ -77,8 +78,8 @@ function wpt_fullscreen()
 
 function wpt_init_fd_slider()
   {
-    var animation, maxvalue, minvalue, mstep;
-    var fd_sliders = document.getElementsByClassName('fd_slider');
+    var animation, maxvalue, minvalue, mstep,
+        fd_sliders = document.getElementsByClassName('fd_slider');
     if($id('dialog').offsetTop == 200)
       {
         animation = 'jump';
@@ -122,8 +123,8 @@ function wpt_init_fd_slider()
 
 function wpt_init_select()
   {
-    var inputbox, selected, select_eles, select_element;
-    var select_boxes = document.getElementsByClassName('segmented');
+    var inputbox, selected, select_eles, select_element,
+        select_boxes = document.getElementsByClassName('segmented');
     for(x in select_boxes)
       {
         selected = '';
@@ -164,13 +165,14 @@ function wpt_device_specific()
 
 function wpt_change_selected()
   {
+    var container = this.parentNode,
+        selectables = container.childNodes,
+        same_diff_height,
+        modevalue;
     if(this.className.indexOf(' selected') != -1)
       {
         return;
       }
-    var container = this.parentNode;
-    var selectables = container.childNodes;
-    var same_diff_height;
     
     if(wpt_device_type == 'ipad')
       {
@@ -196,43 +198,42 @@ function wpt_change_selected()
     
     if(this.className.indexOf('common') !== -1)
       {
-        var modevalue;
-        if($id('wpt_spaddd').value.indexOf('common') !== -1)
+        if(cssobjects.padding.common.indexOf('common') !== -1)
           {
-            modevalue = $id('padtop').value;
+            modevalue = cssobjects.padding.top;
             
-            $id('padleft').value = modevalue;
+            cssobjects.padding.left = modevalue;
             fdSlider.updateSlider($id('padleft').id);
             
-            $id('padright').value = modevalue;
+            cssobjects.padding.right = modevalue;
             fdSlider.updateSlider($id('padright').id);
             
-            $id('padbottom').value = modevalue;
+            cssobjects.padding.bottom = modevalue;
             fdSlider.updateSlider($id('padbottom').id);
           }
 
-        if($id('wpt_smargd').value.indexOf('common') !== -1)
+        if(cssobjects.margin.common.indexOf('common') !== -1)
           {
-            modevalue = $id('martop').value;
+            modevalue = cssobjects.margin.top;
             
-            $id('marleft').value = modevalue;
+            cssobjects.margin.left = modevalue;
             fdSlider.updateSlider($id('marleft').id);
             
-            $id('marright').value = modevalue;
+            cssobjects.margin.right = modevalue;
             fdSlider.updateSlider($id('marright').id);
             
-            $id('marbottom').value = modevalue;
+            cssobjects.margin.bottom = modevalue;
             fdSlider.updateSlider($id('marbottom').id);
           }
 
-        if($id('wpt_sbgd').value.indexOf('common') !== -1)
+        if(cssobjects.background.common.indexOf('common') !== -1)
           {
-            modevalue = $id('bgred').value;
+            modevalue = cssobjects.background.red;
             
-            $id('bggreen').value = modevalue;
+            cssobjects.background.green = modevalue;
             fdSlider.updateSlider($id('bggreen').id);
             
-            $id('bgblue').value = modevalue;
+            cssobjects.background.blue = modevalue;
             fdSlider.updateSlider($id('bgblue').id);
           }
 
@@ -356,14 +357,62 @@ function wpt_setButton(id, value)
       }
   }
 
+function wpt_change_vars()
+  {
+    cssobjects.position = {};
+    cssobjects.position.onoff = $id('wpt_sposonoff').value;
+    cssobjects.position.pos = $id('wpt_spostype1').value;
+    cssobjects.position.type = $id('wpt_spostype2').value;
+    cssobjects.position.top = $id('postop').value;
+    cssobjects.position.left = $id('posleft').value;
+    cssobjects.position.right = $id('posright').value;
+    cssobjects.position.bottom = $id('posbottom').value;
+    
+    cssobjects.size = {};
+    cssobjects.size.onoff = $id('wpt_ssizeonoff').value;
+    cssobjects.size.type = $id('wpt_ssizetype').value;
+    cssobjects.size.height = $id('height').value;
+    cssobjects.size.width = $id('width').value;
+    
+    cssobjects.padding = {};
+    cssobjects.padding.onoff = $id('wpt_spadonoff').value;
+    cssobjects.padding.common = $id('wpt_spaddd').value;
+    cssobjects.padding.top = $id('padtop').value;
+    cssobjects.padding.left = $id('padleft').value;
+    cssobjects.padding.right = $id('padright').value;
+    cssobjects.padding.bottom = $id('padbottom').value;
+    
+    cssobjects.margin = {};
+    cssobjects.margin.onoff = $id('wpt_smargonoff').value;
+    cssobjects.margin.common = $id('wpt_smargd').value;
+    cssobjects.margin.top = $id('martop').value;
+    cssobjects.margin.left = $id('marleft').value;
+    cssobjects.margin.right = $id('marright').value;
+    cssobjects.margin.bottom = $id('marbottom').value;
+    
+    cssobjects.display = {};
+    cssobjects.display.onoff = $id('wpt_sdisponoff').value;
+    cssobjects.display.type = $id('wpt_sdisplayt').value;
+    
+    cssobjects.background = {};
+    cssobjects.background.onoff = $id('wpt_sbgonoff').value;
+    cssobjects.background.alpha = $id('bgalpha').value;
+    cssobjects.background.red = $id('bgred').value;
+    cssobjects.background.green = $id('bggreen').value;
+    cssobjects.background.blue = $id('bgblue').value;
+    cssobjects.background.common = $id('wpt_sbgd').value;
+    cssobjects.background.img = $id('wpt_sbackgroundimg').value;
+  }
+
 function wpt_slider_changed(value, menu)
   {
+    var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id,
+        modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML,
+        modevalue = value;
+    
+    //wpt_change_vars();
     if(initialized == true)
       {
-        var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id;
-        var modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML;
-        var modevalue = value;
-        
         if((menu.parentNode.parentNode.parentNode.childNodes[0].innerHTML == 'Background:')||(menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML == 'Background:'))
         {
           $id('box').style.background = getColor('bgslider','bgslider','bgslider');
@@ -597,7 +646,6 @@ function wpt_slider_changed(value, menu)
             break;
         }
       }
-    
     window.setTimeout(generate_css, 125);
   }
 
@@ -646,147 +694,101 @@ function getColor(red_id, green_id, blue_id)
     return '#'+colorred+colorgreen+colorblue;
   }
 
-var cssobjects = {};
-
 function generate_css()
   {
     var value1, value2, value3, value4, color, inset, css = '.selfCSS { \n';
     
-    cssobjects.position = {};
-    cssobjects.position.onoff = $id('wpt_sposonoff').value;
-    cssobjects.position.pos = $id('wpt_spostype1').value;
-    cssobjects.position.type = $id('wpt_spostype2').value;
-    cssobjects.position.top = $id('postop').value;
-    cssobjects.position.left = $id('posleft').value;
-    cssobjects.position.right = $id('posright').value;
-    cssobjects.position.bottom = $id('posbottom').value;
+    wpt_change_vars();
     
-    cssobjects.size = {};
-    cssobjects.size.onoff = $id('wpt_ssizeonoff').value;
-    cssobjects.size.type = $id('wpt_ssizetype').value;
-    cssobjects.size.height = $id('height').value;
-    cssobjects.size.width = $id('width').value;
-    
-    cssobjects.padding = {};
-    cssobjects.padding.onoff = $id('wpt_spadonoff').value;
-    cssobjects.padding.common = $id('wpt_spaddd').value;
-    cssobjects.padding.top = $id('padtop').value;
-    cssobjects.padding.left = $id('padleft').value;
-    cssobjects.padding.right = $id('padright').value;
-    cssobjects.padding.bottom = $id('padbottom').value;
-    
-    cssobjects.margin = {};
-    cssobjects.margin.onoff = $id('wpt_smargonoff').value;
-    cssobjects.margin.common = $id('wpt_smargd').value;
-    cssobjects.margin.top = $id('martop').value;
-    cssobjects.margin.left = $id('marleft').value;
-    cssobjects.margin.right = $id('marright').value;
-    cssobjects.margin.bottom = $id('marbottom').value;
-    
-    cssobjects.display = {};
-    cssobjects.display.onoff = $id('wpt_sdisponoff').value;
-    cssobjects.display.type = $id('wpt_sdisplayt').value;
-    
-    cssobjects.background = {};
-    cssobjects.background.onoff = $id('wpt_sbgonoff').value;
-    cssobjects.background.alpha = $id('bgalpha').value;
-    cssobjects.background.red = $id('bgred').value;
-    cssobjects.background.green = $id('bggreen').value;
-    cssobjects.background.blue = $id('bgblue').value;
-    cssobjects.background.common = $id('wpt_sbgd').value;
-    cssobjects.background.img = $id('wpt_sbackgroundimg').value;
-    
-    
-    
-    console.log(cssobjects);
+    //console.log(cssobjects);
     
     //position
-    if($id('wpt_sposonoff').value.indexOf('on') !== -1)
+    if(cssobjects.position.onoff.indexOf('on') !== -1)
       {
-        css += '  position: '+$id('wpt_spostype1').value+'; \n';
-        css += '  top: '+$id('postop').value+$id('wpt_spostype2').value+'; \n';
-        css += '  left: '+$id('posleft').value+$id('wpt_spostype2').value+'; \n';
-        css += '  right: '+$id('posright').value+$id('wpt_spostype2').value+'; \n';
-        css += '  bottom: '+$id('posbottom').value+$id('wpt_spostype2').value+'; \n';
+        css += '  position: '+cssobjects.position.pos+'; \n';
+        css += '  top: '+cssobjects.position.top+cssobjects.position.type+'; \n';
+        css += '  left: '+cssobjects.position.left+cssobjects.position.type+'; \n';
+        css += '  right: '+cssobjects.position.right+cssobjects.position.type+'; \n';
+        css += '  bottom: '+cssobjects.position.bottom+cssobjects.position.type+'; \n';
       }
     
     //size
-    if($id('wpt_ssizeonoff').value.indexOf('on') !== -1)
+    if(cssobjects.size.onoff.indexOf('on') !== -1)
       {
-        if($id('height').value == '0')
+        if(cssobjects.size.height == '0')
           {
             css += '  height: auto; \n';
           }
         else
           {
-            css += '  height: '+$id('height').value+$id('wpt_ssizetype').value+'; \n';
+            css += '  height: '+cssobjects.size.height+cssobjects.size.type+'; \n';
           }
         
-        if($id('width').value == '0')
+        if(cssobjects.size.width == '0')
           {
             css += '  width: auto; \n';
           }
         else
           {
-            css += '  width: '+$id('width').value+$id('wpt_ssizetype').value+'; \n';
+            css += '  width: '+cssobjects.size.width+cssobjects.size.type+'; \n';
           }
       }
     
     
     //padding
-    if($id('wpt_spadonoff').value.indexOf('on') !== -1)
+    if(cssobjects.padding.onoff.indexOf('on') !== -1)
       {
-        if($id('wpt_spaddd').value == 'common')
+        if(cssobjects.padding.common == 'common')
           {
-            css += '  padding: '+$id('padtop').value+'px; \n';
+            css += '  padding: '+cssobjects.padding.top+'px; \n';
           }
         else
           {
-            css += '  padding: '+$id('padtop').value+'px '+$id('padright').value+'px '+$id('padbottom').value+'px '+$id('padleft').value+'px; \n';
+            css += '  padding: '+cssobjects.padding.top+'px '+cssobjects.padding.right+'px '+cssobjects.padding.bottom+'px '+cssobjects.padding.left+'px; \n';
           }
       }
     
     
     //margin
-    if($id('wpt_smargonoff').value.indexOf('on') !== -1)
+    if(cssobjects.margin.onoff.indexOf('on') !== -1)
       {
-        if($id('martop').value != '-101')
+        if(cssobjects.margin.top != '-101')
           {
-            value1 = $id('martop').value+'px ';
+            value1 = cssobjects.margin.top+'px ';
           }
         else
           {
             value1 = 'auto ';
           }
         
-        if($id('marright').value != '-101')
+        if(cssobjects.margin.right != '-101')
           {
-            value2 = $id('marright').value+'px ';
+            value2 = cssobjects.margin.right+'px ';
           }
         else
           {
             value2 = 'auto ';
           }
         
-        if($id('marbottom').value != '-101')
+        if(cssobjects.margin.bottom != '-101')
           {
-            value3 = $id('marbottom').value+'px ';
+            value3 = cssobjects.margin.bottom+'px ';
           }
         else
           {
             value3 = 'auto ';
           }
         
-        if($id('marleft').value != '-101')
+        if(cssobjects.margin.left != '-101')
           {
-            value4 = $id('marleft').value+'px';
+            value4 = cssobjects.margin.left+'px';
           }
         else
           {
             value4 = 'auto';
           }
         
-        if($id('wpt_smargd').value == 'common')
+        if(cssobjects.margin.common == 'common')
           {
             css += '  margin: '+value1+'; \n';
           }
@@ -798,22 +800,22 @@ function generate_css()
     
     
     //display
-    if($id('wpt_sdisponoff').value.indexOf('on') !== -1)
+    if(cssobjects.display.onoff.indexOf('on') !== -1)
       {
-        css += '  display: '+$id('wpt_sdisplayt').value+'; \n';
+        css += '  display: '+cssobjects.display.type+'; \n';
       }
     
     //background
     //color
-    if($id('wpt_sbgonoff').value == 'on')
+    if(cssobjects.background.onoff == 'on')
       {
-        if($id('bgalpha').value != '1')
+        if(cssobjects.background.alpha != '1')
           {
-            css += '  background: rgba('+$id('bgred').value+', '+$id('bggreen').value+', '+$id('bgblue').value+', '+$id('bgalpha').value+'); \n';
+            css += '  background: rgba('+cssobjects.background.red+', '+cssobjects.background.green+', '+cssobjects.background.blue+', '+cssobjects.background.alpha+'); \n';
           }
         else
           {
-            if($id('wpt_sbgd').value == 'common')
+            if(cssobjects.background.common == 'common')
               {
                 css += '  background: '+getColor('bgred', 'bgred', 'bgred')+'; \n';
               }
@@ -825,13 +827,13 @@ function generate_css()
       }
     
     //image
-    if($id('wpt_sbackgroundimg').value != 'none')
+    if(cssobjects.background.img != 'none')
       {
-        if($id('wpt_sbackgroundimg').value == 'summer')
+        if(cssobjects.background.img == 'summer')
           {
             css += '  background-image: url(\'./summer.jpg\'); \n';
           }
-        if($id('wpt_sbackgroundimg').value == 'winter')
+        if(cssobjects.background.img == 'winter')
           {
             css += '  background-image: url(\'./winter.jpg\'); \n';
           }
