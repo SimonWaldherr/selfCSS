@@ -14,7 +14,7 @@ var wpt_device_type = false,
 
 function wpt_init() {
     "use strict";
-    var menu_title, count = 0, i = 0, initialized,
+    var menu_title, count = 0, i = 0,
         menu_titles = document.getElementsByClassName('wpt_contents');
     wpt_init_fd_slider();
     $id('loadingstat').innerHTML += '.';
@@ -973,7 +973,7 @@ function loadCSSexample(demo) {
         wpt_setButton('filteronoff', 'on');
         $id('fsepia').value = 30;
         fdSlider.updateSlider($id('fsepia').id);
-        $id('fbright').value = 5;
+        $id('fbright').value = 100;
         fdSlider.updateSlider($id('fbright').id);
         $id('fsat').value = 60;
         fdSlider.updateSlider($id('fsat').id);
