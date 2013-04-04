@@ -2,7 +2,7 @@
 
 # Constants
 SERVICE_URL=http://closure-compiler.appspot.com/compile
-NEWFILE="c`date +"%d%m%y"`.js"
+NEWFILE="min/script.js"
 
 # Check if files to compile are provided
 if [ $# -eq 0 ]

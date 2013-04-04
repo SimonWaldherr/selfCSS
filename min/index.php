@@ -9,7 +9,7 @@
 <div id="viewmode" class="segmented"><div class="segment" onclick="editor_show('CSS');">CSS</div><div class="segment" onclick="editor_show('HTML');">HTML</div><div class="segment selected" onclick="editor_show('View');">Preview</div>
 </div>
 </div>
-<div id="sidebar" class="scrollable" data-url=""> <div class="header">Main</div>
+<div id="sidebar" class="ptr_scrollable"> <div class="ptr_wrap"> <div class="header">Main</div>
 <div class="item"><div class="title" id="Main-Position">Position</div>
 <div class="wpt_contents"> <div id="posonoff" class="segmented segtwo"><div class="off segment selected">off</div><div class="on segment">on</div></div>
 <div id="postype1" class="segmented segthree"><div class="relative segment selected">relative</div><div class="absolute segment">absolute</div><div class="fixed segment">fixed</div></div>
@@ -125,7 +125,7 @@
 <div class="wpt_contents"> <div id="filteronoff" class="segmented segtwo"><div class="off segment">off</div><div class="on segment selected">on</div></div>
 <table> <tbody> <tr> <td>Blur:</td> <td> <input name="fblur" id="fblur" class="fd_slider" type="range" max="25" min="0" title="fblur" value="0" maxlength="6" /> </td> </tr> <tr> <td>Grayscale:</td> <td> <input name="fgray" id="fgray" class="fd_slider" type="range" max="100" min="0" title="fgray" value="0" maxlength="6" /> </td> </tr> <tr> <td>Sepia:</td> <td> <input name="fsepia" id="fsepia" class="fd_slider" type="range" max="100" min="0" title="fsepia" value="12" maxlength="6" /> </td> </tr> <tr> <td>Brightness:</td> <td> <input name="fbright" id="fbright" class="fd_slider" type="range" max="100" min="0" title="fbright" value="0" maxlength="6" /> </td> </tr> <tr> <td>Hue-Rotate:</td> <td> <input name="fhue" id="fhue" class="fd_slider" type="range" max="359" min="0" title="fhue" value="0" maxlength="6" /> </td> </tr> <tr> <td>Saturate:</td> <td> <input name="fsat" id="fsat" class="fd_slider" type="range" max="200" min="0" title="fsat" value="200" maxlength="6" /> </td> </tr> <tr> <td>Contrast:</td> <td> <input name="fcontr" id="fcontr" class="fd_slider" type="range" max="100" min="0" title="fcontr" value="100" maxlength="6" /> </td> </tr> </tbody> </table> </div>
 </div>
-<div id="sidebarend"></div>
+<div id="sidebarend"></div></div>
 </div>
 <div id="editor"> <div id="editorView"> <div class="selfCSS" style="background-image:url(./summer.jpg);"></div>
 </div>
