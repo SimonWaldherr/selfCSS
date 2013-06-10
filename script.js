@@ -787,10 +787,10 @@ function wpt_slider_changed(value, menu) {
     modevalue = value;
 
   ischanging += 1;
-  //wpt_change_vars();
-  if ((initialized === true)&&(ischanging <3)) {
+  if ((initialized === true) && (ischanging < 3)) {
     if ((menu.parentNode.parentNode.parentNode.childNodes[0].innerHTML === 'Background:') || (menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML === 'Background:')) {
       $id('box').style.background = getColor('bgslider', 'bgslider', 'bgslider');
+      ischanging -= 1;
       return false;
     }
     switch (modemenu) {
