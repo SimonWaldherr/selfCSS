@@ -1,4 +1,3 @@
-function insert_sm()
-  {
-    
-  }
+function insert_sm() {
+  
+}
