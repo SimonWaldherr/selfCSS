@@ -2,9 +2,9 @@
 [selfCSS](http://selfcss.org/) a CSS3 WYSIWYG Editor/Generator (in HTML5, CSS3 and JS)
 
 ##about
-License: MIT  
-Version: 0.9c  
-Date: 24.03.2013  
+License:   MIT  
+Version: 0.9.1  
+Date:  07.2013  
 
 ##contact
 Feel free to contact me via [eMail](mailto:contact@selfcss.org) or on [Twitter](http://twitter.com/simonwaldherr). This software will be continually developed. Suggestions and tips are always welcome.
