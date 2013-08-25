@@ -1341,7 +1341,7 @@ function editCSS(mode) {
 }
 
 /*!
- * Add to Homescreen v2.0.7 ~ Copyright (c) 2013 Matteo Spinelli, http://cubiq.org
+ * Add to Homescreen v2.0.8 ~ Copyright (c) 2013 Matteo Spinelli, http://cubiq.org
  * Released under MIT license, http://cubiq.org/license
  */
 var addToHome = (function (w) {
@@ -1366,7 +1366,7 @@ var addToHome = (function (w) {
 
 		options = {
 			autostart: true,			// Automatically open the balloon
-			returningVisitor: false,	// Show the balloon to returning visitors only (setting this to true is HIGHLY RECCOMENDED)
+			returningVisitor: false,	// Show the balloon to returning visitors only (setting this to true is highly recommended)
 			animationIn: 'drop',		// drop || bubble || fade
 			animationOut: 'fade',		// drop || bubble || fade
 			startDelay: 2000,			// 2 seconds from page load before the balloon appears
@@ -1402,7 +1402,7 @@ var addToHome = (function (w) {
 			nl_nl: 'Installeer deze webapp op uw %device: tik %icon en dan <strong>Voeg toe aan beginscherm</strong>.',
 			pl_pl: 'Aby zainstalować tę aplikacje na %device: naciśnij %icon a następnie <strong>Dodaj jako ikonę</strong>.',
 			pt_br: 'Instale este aplicativo em seu %device: aperte %icon e selecione <strong>Adicionar à Tela Inicio</strong>.',
-			pt_pt: 'Para instalar esta aplicação no seu %device, prima o %icon e depois o <strong>Adicionar ao ecrã principal</strong>.',
+			pt_pt: 'Para instalar esta aplicação no seu %device, prima o %icon e depois em <strong>Adicionar ao ecrã principal</strong>.',
 			ru_ru: 'Установите это веб-приложение на ваш %device: нажмите %icon, затем <strong>Добавить в «Домой»</strong>.',
 			sv_se: 'Lägg till denna webbapplikation på din %device: tryck på %icon och därefter <strong>Lägg till på hemskärmen</strong>.',
 			th_th: 'ติดตั้งเว็บแอพฯ นี้บน %device ของคุณ: แตะ %icon และ <strong>เพิ่มที่หน้าจอโฮม</strong>',
@@ -1485,7 +1485,7 @@ var addToHome = (function (w) {
 
 		balloon.className = (isIPad ? 'addToHomeIpad' : 'addToHomeIphone') + (touchIcon ? ' addToHomeWide' : '');
 		balloon.innerHTML = touchIcon +
-			options.message.replace('%device', platform).replace('%icon', OSVersion >= 4.2 ? '<span class="addToHomeShare"></span>' : '<span class="addToHomePlus">+</span>') +
+			options.message.replace('%device', platform).replace('%icon', OSVersion >= 4.2 ? '<span class="addToHomeShare' + (OSVersion >= 7 ? ' addToHomeShareOS7' : '') + '"></span>' : '<span class="addToHomePlus">+</span>') +
 			(options.arrow ? '<span class="addToHomeArrow"></span>' : '') +
 			(options.closeButton ? '<span class="addToHomeClose">\u00D7</span>' : '');
 
@@ -3465,24 +3465,27 @@ window.PR_SHOULD_USE_CONTINUATION = !0;
 })();
 
 
-/*
- *
- * PullToRefresh
- * Version 0.009
- * License:  MIT
- * SimonWaldherr
- *
- */
+/* * * * * * * * *
+ * PullToRefresh *
+ * Version 0.1.0 *
+ * License:  MIT *
+ * SimonWaldherr *
+ * * * * * * * * */
+
+/*jslint browser: true, indent: 2 */
+/*global ActiveXObject */
 
 var ptr = [],
-    ptr_settings = {mlang : 'en', mode : 'mail'},
-    ptr_messages = {en : {pulltorefresh : 'Pull to refresh', 'loading' : 'Loading ...'},
-                    de : {pulltorefresh : 'ziehen zum aktualisieren', 'loading' : 'laden ...'}};
+  ptr_settings = {mlang : 'en', mode : 'mail'},
+  ptr_messages = {
+    en : {pulltorefresh : 'Pull to refresh', 'loading' : 'Loading ...'},
+    de : {pulltorefresh : 'ziehen zum aktualisieren', 'loading' : 'laden ...'}
+  };
 
 var ptr_init = function (language) {
   "use strict";
   var i = 0;
-  if(language !== undefined) {
+  if (language !== undefined) {
     ptr_settings.mlang = language;
   }
   ptr.scrollable_parent = false;
@@ -3530,7 +3533,6 @@ var ptr_init = function (language) {
 
           ptr.scrollable_parent = i;
           i = 10;
-          
 
           if (parent.hasAttribute('data-url') !== false) {
             if (parent.getElementsByClassName('ptr_box')[0] === undefined) {
@@ -3553,10 +3555,9 @@ var ptr_init = function (language) {
               parent.firstElementChild.insertBefore(ptr.box, parent.firstElementChild.firstChild);
             } else {
               parent.getElementsByClassName('ptr_box')[0].style.opacity = 1.0;
-              if(parent.getElementsByClassName('ptr_text')[0].innerHTML !== ptr_messages[ptr_settings.mlang].loading) {
+              if (parent.getElementsByClassName('ptr_text')[0].innerHTML !== ptr_messages[ptr_settings.mlang].loading) {
                 parent.getElementsByClassName('ptr_text')[0].innerHTML = ptr_messages[ptr_settings.mlang].pulltorefresh;
               }
-              
             }
           } else if (parent.getElementsByClassName('ptr_box')[0] !== undefined) {
             parent.removeChild(parent.getElementsByClassName('ptr_box')[0]);
@@ -3589,7 +3590,13 @@ var ptr_init = function (language) {
       scroll = false,
       rotate = 90,
       i = 0,
-      top, scrolldistance, time, insert, inserted, ajax, ajaxTimeout, requrl;
+      top,
+      time,
+      insert,
+      inserted,
+      ajax,
+      ajaxTimeout,
+      requrl;
 
     if (ptr.scrollable_parent === false) {
       e.preventDefault();
@@ -3601,15 +3608,11 @@ var ptr_init = function (language) {
     }
 
     if ((ptr.scrollable_parent !== false) && (parent.hasAttribute('data-url') !== false)) {
-
       scroll = true;
-
       ptr.element = parent;
       ptr.wrapelement = ptr.element.getElementsByClassName('ptr_wrap')[0];
       top = ptr.element.scrollTop;
       ptr.box = ptr.element.getElementsByClassName('ptr_box')[0];
-      scrolldistance = Math.abs(ptr.element.scrollTop);
-
       if ((ptr.wrapelement.className.indexOf(' active') === -1) && (!ptr.wrapelement.getElementsByClassName('ptr_image')[0].className.match('ptr_loading')) && (ptr.element.scrollTop < 1)) {
         if (ptr.element.scrollTop < -25) {
           rotate = (top < -40) ? -90 : 130 + parseInt(top * 12 + 270, 10);
@@ -3640,8 +3643,6 @@ var ptr_init = function (language) {
             ajax = (window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP") : (XMLHttpRequest && new XMLHttpRequest()) || null;
             ajaxTimeout = window.setTimeout(function () {
               ajax.abort();
-              console.log("AJAX Timeout Error");
-              alert('AJAX Timeout Error');
               ptr.wrapelement.getElementsByClassName('ptr_text')[0].innerHTML = '';
               ptr.wrapelement.className = ptr.wrapelement.className.replace(' ptr_active', '');
               ptr.wrapelement.style.top = '0px';
@@ -3653,10 +3654,7 @@ var ptr_init = function (language) {
               if (ajax.readyState === 4) {
                 if (ajax.status === 200) {
                   clearTimeout(ajaxTimeout);
-                  //console.log("AJAX-Status: " + ajax.status + " " + ajax.statusText + " at " + time.getTime());
                   if (ajax.status !== 200) {
-                    console.log("AJAX Response Error");
-                    alert('Could not connect');
                     ptr.wrapelement.style.top = '0px';
                     ptr.box.getElementsByClassName('ptr_image')[0].className = ptr.getElementsByClassName('ptr_image')[0].className.replace(' loading', '');
                     ptr.wrapelement.className = ptr.wrapelement.className.replace(' ptr_active', '');
@@ -3705,8 +3703,7 @@ var ptr_init = function (language) {
 
   document.addEventListener('touchend', function (e) {
     var parent = e.target,
-      i = 0,
-      top;
+      i = 0;
 
     for (i = 0; i < ptr.scrollable_parent; i += 1) {
       parent = parent.parentNode;
@@ -3717,7 +3714,6 @@ var ptr_init = function (language) {
         ptr.element = parent;
         ptr.wrapelement = ptr.element.getElementsByClassName('ptr_wrap')[0];
         ptr.eleId = parent.id;
-        top = ptr.element.scrollTop;
         ptr.box = ptr.element.getElementsByClassName('ptr_box')[0];
 
         if (ptr.wrapelement.getElementsByClassName('ptr_image')[0].className.match('ptr_loading')) {
