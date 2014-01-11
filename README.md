@@ -4,7 +4,7 @@
 ##about
 License:   MIT  
 Version: 0.9.1  
-Date:  07.2013  
+Date:  01.2014  
 
 ##contact
 Feel free to contact me via [eMail](mailto:contact@selfcss.org) or on [Twitter](http://twitter.com/simonwaldherr). This software will be continually developed. Suggestions and tips are always welcome.

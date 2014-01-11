@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       options: {
         banner: '/* * * * * * * * * *\n' +
                 ' *     selfCSS     *\n' +
-                ' *  Version 0.9.1  *\n' +
+                ' *  Version <%= pkg.version %>  *\n' +
                 ' *  License:  MIT  *\n' +
                 ' * Simon  Waldherr *\n' +
                 ' * * * * * * * * * */\n\n',
@@ -32,7 +32,7 @@ module.exports = function(grunt) {
         options: {
           banner: '/* * * * * * * * * *\n' +
                   ' *     selfCSS     *\n' +
-                  ' *  Version 0.9.1  *\n' +
+                  ' *  Version <%= pkg.version %>  *\n' +
                   ' *  License:  MIT  *\n' +
                   ' * Simon  Waldherr *\n' +
                   ' * * * * * * * * * */\n\n'
