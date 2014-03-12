@@ -1,12 +1,5 @@
 /*jslint browser: true, indent: 2 */
-/*global $id, window, wpt_change_selected, wpt_device_specific, wpt_fullscreen, wpt_init, wpt_init_fd_slider, wpt_init_select, wpt_setButton, wpt_set_device_type, wpt_save_items_height, wpt_collapse_all, wpt_fold_toggle, wpt_keyset, wpt_keyrelease, insert_sm, loadCSSexample, ptr_init, fdSlider, prettyPrint */
-
-
-
-function $id(id) {
-  "use strict";
-  return document.getElementById(id);
-}
+/*global $id:true, window, wpt_change_selected, wpt_device_specific, wpt_fullscreen:true, wpt_init:true, wpt_init_fd_slider, wpt_init_select, wpt_setButton:true, wpt_set_device_type, wpt_save_items_height, wpt_collapse_all, wpt_fold_toggle, wpt_keyset, wpt_keyrelease, insert_sm, loadCSSexample, ptr_init, fdSlider, prettyPrint */
 
 var wpt_device_type = false,
   wpt_shift_key_status = false,
@@ -14,9 +7,43 @@ var wpt_device_type = false,
   cssobjects = {},
   wpt_menu_items_height = [],
   ischanging = 1,
-  css;
+  css,
+  $id,
+  wpt_init,
+  wpt_set_device_type,
+  wpt_fullscreen,
+  wpt_keyset,
+  wpt_keyrelease,
+  wpt_dialog,
+  wpt_fold_in,
+  wpt_fold_out,
+  wpt_fold_toggle,
+  wpt_collapse_all,
+  wpt_expand_all,
+  wpt_expand_enabled,
+  wpt_save_items_height,
+  wpt_init_fd_slider,
+  wpt_init_select,
+  wpt_device_specific,
+  wpt_change_vars,
+  getColor,
+  buildMailtoURL,
+  generate_css,
+  wpt_change_selected,
+  wpt_setButton,
+  wpt_slider_changed,
+  CSStextarea,
+  loadExample,
+  loadCSSexample,
+  editor_show,
+  editCSS;
 
-function wpt_init() {
+$id = function (id) {
+  "use strict";
+  return document.getElementById(id);
+};
+
+wpt_init = function () {
   "use strict";
   var menu_title,
     i = 0,
@@ -43,9 +70,9 @@ function wpt_init() {
   loadCSSexample('text');
   ptr_init();
   initialized = true;
-}
+};
 
-function wpt_set_device_type() {
+wpt_set_device_type = function () {
   "use strict";
   if ($id('toolbar').offsetHeight === 44) {
     wpt_device_type = 'desktop';
@@ -56,9 +83,9 @@ function wpt_set_device_type() {
   } else {
     wpt_device_type = false;
   }
-}
+};
 
-function wpt_fullscreen() {
+wpt_fullscreen = function () {
   "use strict";
   var element = document.body;
   if (element.requestFullScreen) {
@@ -68,9 +95,9 @@ function wpt_fullscreen() {
   } else if (element.webkitRequestFullScreen) {
     element.webkitRequestFullScreen();
   }
-}
+};
 
-function wpt_keyset(evt) {
+wpt_keyset = function (evt) {
   "use strict";
   if (evt.keyCode === 16) {
     if (wpt_shift_key_status === 0) {
@@ -81,9 +108,9 @@ function wpt_keyset(evt) {
       evt.stopPropagation();
     }
   }
-}
+};
 
-function wpt_keyrelease(evt) {
+wpt_keyrelease = function (evt) {
   "use strict";
   if (evt.keyCode === 16) {
     if (wpt_shift_key_status === 0) {
@@ -94,9 +121,9 @@ function wpt_keyrelease(evt) {
       evt.stopPropagation();
     }
   }
-}
+};
 
-function wpt_dialog(id) {
+wpt_dialog = function (id) {
   "use strict";
   if (id !== undefined) {
     $id('dialog').innerHTML = $id(id).innerHTML;
@@ -109,9 +136,9 @@ function wpt_dialog(id) {
     $id('dimmer').style.zIndex = '-1';
     $id('dimmer').style.opacity = '0.0';
   }
-}
+};
 
-function wpt_fold_in(e) {
+wpt_fold_in = function (e) {
   "use strict";
   e.className = 'item';
   if (wpt_device_type === 'ipad') {
@@ -122,9 +149,9 @@ function wpt_fold_in(e) {
   if (e.firstChild.nextSibling.nextSibling.className === 'wpt_contents') {
     e.firstChild.nextSibling.nextSibling.style.display = 'none';
   }
-}
+};
 
-function wpt_fold_out(e) {
+wpt_fold_out = function (e) {
   "use strict";
   if (!wpt_shift_key_status) {
     wpt_collapse_all();
@@ -134,9 +161,9 @@ function wpt_fold_out(e) {
   if (e.firstChild.nextSibling.nextSibling.className === 'wpt_contents') {
     e.firstChild.nextSibling.nextSibling.style.display = 'block';
   }
-}
+};
 
-function wpt_fold_toggle() {
+wpt_fold_toggle = function () {
   "use strict";
   var prev_className = this.parentNode.className;
   if (prev_className !== undefined) {
@@ -146,9 +173,9 @@ function wpt_fold_toggle() {
       wpt_fold_out(this.parentNode);
     }
   }
-}
+};
 
-function wpt_collapse_all() {
+wpt_collapse_all = function () {
   "use strict";
   var menu_items = document.getElementsByClassName('wpt_contents'),
     i,
@@ -164,9 +191,9 @@ function wpt_collapse_all() {
     $id('loadingstat').innerHTML += '.';
   }
   window.setTimeout(wpt_dialog, 225);
-}
+};
 
-function wpt_expand_all() {
+wpt_expand_all = function () {
   "use strict";
   var pre_shift_key_status = wpt_shift_key_status,
     i,
@@ -180,9 +207,9 @@ function wpt_expand_all() {
     }
   }
   wpt_shift_key_status = pre_shift_key_status;
-}
+};
 
-function wpt_expand_enabled() {
+wpt_expand_enabled = function () {
   "use strict";
   wpt_collapse_all();
   var pre_shift_key_status = wpt_shift_key_status,
@@ -199,9 +226,9 @@ function wpt_expand_enabled() {
     }
   }
   wpt_shift_key_status = pre_shift_key_status;
-}
+};
 
-function wpt_save_items_height() {
+wpt_save_items_height = function () {
   "use strict";
   var menu_items = document.getElementsByClassName('wpt_contents'),
     menu_item,
@@ -220,9 +247,9 @@ function wpt_save_items_height() {
       }
     }
   }
-}
+};
 
-function wpt_init_fd_slider() {
+wpt_init_fd_slider = function () {
   "use strict";
   var animation,
     maxvalue,
@@ -260,9 +287,9 @@ function wpt_init_fd_slider() {
       });
     }
   }
-}
+};
 
-function wpt_init_select() {
+wpt_init_select = function () {
   "use strict";
   var inputbox,
     selected,
@@ -293,16 +320,16 @@ function wpt_init_select() {
       select_boxes[x].parentNode.insertBefore(inputbox, select_boxes[x]);
     }
   }
-}
+};
 
-function wpt_device_specific() {
+wpt_device_specific = function () {
   "use strict";
   if (wpt_device_type === 'desktop') {
     $id('special_style').innerHTML = '.fd-slider-handle:before,.fd-slider-handle:after{content:"";opacity:0;-webkit-transition-property:all;-moz-transition-property:all;-ms-transition-property:all;-o-transition-property:all;transition-property:all;-webkit-transition-duration:0.3s;-moz-transition-duration:0.3s;-ms-transition-duration:0.3s;-o-transition-duration:0.3s;transition-duration:0.3s;-webkit-transition-delay:0.2s;-moz-transition-delay:0.2s;-ms-transition-delay:0.2s;-o-transition-delay:0.2s;transition-delay:0.2s;}.fd-slider-handle::before{display:block;position:absolute;top:-30px;left:-15px;margin:0px;margin-top:8px;width:50px;padding:1px;height:14px;line-height:12px;font-size:10px;text-shadow:0 1px 0 black;color:white;background:#222;z-index:1;content:attr(aria-valuetext);-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;-webkit-box-shadow:0 0 4px #AAA;-moz-box-shadow:0 0 4px #aaa;box-shadow:0 0 4px #AAA;}.fd-slider-handle:after{outline:none;content:"";display:block;position:absolute;top:-14px;left:50%;margin:0 0 0 -5px;background:#222;z-index:2;width:10px;height:10px;overflow:hidden;-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);-webkit-box-shadow:0 0 4px #aaa;-moz-box-shadow:0 0 4px #aaa;box-shadow:0 0 4px #aaa;clip:rect(4px,14px,14px,4px);}.fd-slider-focused .fd-slider-handle:before,.fd-slider-hover .fd-slider-handle:before,.fd-slider-active .fd-slider-handle:before{top:-25px;opacity:1;}.fd-slider-focused .fd-slider-handle:after,.fd-slider-hover .fd-slider-handle:after,.fd-slider-active .fd-slider-handle:after{top:-9px;opacity:1;}.oldie .fd-slider-handle:before,.oldie .fd-slider-handle:after{display:none;}';
   }
-}
+};
 
-function wpt_change_vars() {
+wpt_change_vars = function () {
   "use strict";
   cssobjects.position = {};
   cssobjects.position.onoff = $id('wpt_sposonoff').value;
@@ -342,9 +369,9 @@ function wpt_change_vars() {
   cssobjects.background.blue = $id('bgblue').value;
   cssobjects.background.common = $id('wpt_sbgd').value;
   cssobjects.background.img = $id('wpt_sbackgroundimg').value;
-}
+};
 
-function getColor(red_id, green_id, blue_id) {
+getColor = function (red_id, green_id, blue_id) {
   "use strict";
   var colorred,
     colorgreen,
@@ -374,15 +401,15 @@ function getColor(red_id, green_id, blue_id) {
     colorblue = '0' + colorblue;
   }
   return '#' + colorred + colorgreen + colorblue;
-}
+};
 
-function buildMailtoURL(css) {
+buildMailtoURL = function (css) {
   "use strict";
   var encoded = encodeURI(css).replace(/%5B/g, '[').replace(/%5D/g, ']');
   return 'mailto:?body=' + encoded;
-}
+};
 
-function generate_css() {
+generate_css = function () {
   "use strict";
   var value1,
     value2,
@@ -650,9 +677,9 @@ function generate_css() {
   $id('CSStextarea').value = css;
   $id('sendCSSviaMail').innerHTML = '<a href="' + buildMailtoURL(css) + '">send CSS via Mail</a>';
   prettyPrint();
-}
+};
 
-function wpt_change_selected() {
+wpt_change_selected = function () {
   "use strict";
   var container = this.parentNode,
     selectables = container.childNodes,
@@ -748,9 +775,9 @@ function wpt_change_selected() {
   if (this.onclick === null) {
     window.setTimeout(generate_css, 125);
   }
-}
+};
 
-function wpt_setButton(id, value) {
+wpt_setButton = function (id, value) {
   "use strict";
   var button, status, x;
   value = value.replace("segment", "", "gim").replace("selected", "", "gim").replace("full", "", "gim").replace("percent", "%", "gim").trim();
@@ -778,9 +805,9 @@ function wpt_setButton(id, value) {
     return 1;
   }
   return -1;
-}
+};
 
-function wpt_slider_changed(value, menu) {
+wpt_slider_changed = function (value, menu) {
   "use strict";
   var modemenu = menu.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes[0].id,
     modesubmenu = menu.parentNode.parentNode.parentNode.childNodes[1].innerHTML,
@@ -960,23 +987,23 @@ function wpt_slider_changed(value, menu) {
   }
   ischanging -= 1;
   window.setTimeout(generate_css, 125);
-}
+};
 
-function CSStextarea() {
+CSStextarea = function () {
   "use strict";
   $id('editable_style').innerHTML = $id('CSStextarea').value;
   $id('CSSbox').innerHTML = css;
   $id('sendCSSviaMail').innerHTML = '<a href="' + buildMailtoURL(css) + '">send CSS via Mail</a>';
   prettyPrint();
-}
+};
 
-function loadExample(demo) {
+loadExample = function (demo) {
   "use strict";
   $id('HTMLedit').value = $id('demo_' + demo).innerHTML;
   $id('editorView').innerHTML = $id('demo_' + demo).innerHTML;
-}
+};
 
-function loadCSSexample(demo) {
+loadCSSexample = function (demo) {
   "use strict";
   if (demo === 'imgs') {
     wpt_expand_all();
@@ -1011,8 +1038,6 @@ function loadCSSexample(demo) {
     $id('degrot').value = 6;
     fdSlider.updateSlider($id('degrot').id);
     wpt_setButton('filteronoff', 'on');
-    $id('fsepia').value = 100;
-    fdSlider.updateSlider($id('fsepia').id);
     wpt_collapse_all();
   } else if (demo === 'imgw') {
     wpt_expand_all();
@@ -1315,17 +1340,17 @@ function loadCSSexample(demo) {
     wpt_collapse_all();
   }
   window.setTimeout(generate_css, 125);
-}
+};
 
-function editor_show(mode) {
+editor_show = function (mode) {
   "use strict";
   $id('editorCSS').style.display = 'none';
   $id('editorHTML').style.display = 'none';
   $id('editorView').style.display = 'none';
   $id('editor' + mode).style.display = 'block';
-}
+};
 
-function editCSS(mode) {
+editCSS = function (mode) {
   "use strict";
   if (mode === 'on') {
     $id('CSSbox').style.display = 'none';
@@ -1338,4 +1363,4 @@ function editCSS(mode) {
     $id('CSStextarea').style.display = 'none';
     $id('showCSSbutton').style.display = 'none';
   }
-}
+};

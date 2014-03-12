@@ -2,7 +2,7 @@
   "name": "selfcss",
   "title": "selfCSS",
   "description": "a CSS3 WYSIWYG Editor/Generator (in HTML5, CSS3 and JS)",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "homepage": "http://selfcss.org/",
   "author": {
     "name": "Simon Waldherr",
