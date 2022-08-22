@@ -1,15 +1,15 @@
-#selfCSS
+# selfCSS
 [selfCSS](http://selfcss.org/) a CSS3 WYSIWYG Editor/Generator (in HTML5, CSS3 and JS)
 
-##about
+## about
 License:   MIT  
 Version: 0.9.2  
 Date:  03.2014  
 
-##contact
+## contact
 Feel free to contact me via [eMail](mailto:contact@selfcss.org) or on [Twitter](http://twitter.com/simonwaldherr). This software will be continually developed. Suggestions and tips are always welcome.
 
-##resources
+## resources
 This Software uses the following open-source codes: 
 
 * Style and look of [webgl-filter](https://github.com/evanw/webgl-filter/) provided under the terms of MIT license by [Evan Wallace](http://madebyevan.com/). 
