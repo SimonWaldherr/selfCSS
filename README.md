@@ -1,4 +1,8 @@
 # selfCSS
+
+[![DOI](https://zenodo.org/badge/6564234.svg)](https://zenodo.org/badge/latestdoi/6564234) 
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)  
+
 [selfCSS](http://selfcss.org/) a CSS3 WYSIWYG Editor/Generator (in HTML5, CSS3 and JS)
 
 ## about
